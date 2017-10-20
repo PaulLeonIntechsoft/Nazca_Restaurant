@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NazResModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="sp_agregarTipoDeCambio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="varchar" Mode="In" />
+          <Parameter Name="valorCambio" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="sp_aperturarCaja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="varchar" Mode="In" />
+          <Parameter Name="soles" Type="numeric" Mode="In" />
+          <Parameter Name="dolares" Type="numeric" Mode="In" />
+          <Parameter Name="usuario" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_datosMozo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigoMozo" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_listarAperturaCaja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_listarEstadoMesa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigoMesa" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_listarMesas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_listarTiposDeCambio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_listarTiposDeProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_productosPorTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigoTipo" Type="char" Mode="In" />
+        </Function>
+        <EntityContainer Name="NazResModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NazResModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NazResEntities2" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="sp_agregarTipoDeCambio">
+            <Parameter Name="fecha" Mode="In" Type="String" />
+            <Parameter Name="valorCambio" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_aperturarCaja">
+            <Parameter Name="fecha" Mode="In" Type="String" />
+            <Parameter Name="soles" Mode="In" Type="Decimal" />
+            <Parameter Name="dolares" Mode="In" Type="Decimal" />
+            <Parameter Name="usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_datosMozo" ReturnType="Collection(NazResModel.sp_datosMozo_Result)">
+            <Parameter Name="codigoMozo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_listarAperturaCaja" ReturnType="Collection(NazResModel.sp_listarAperturaCaja_Result)" />
+          <FunctionImport Name="sp_listarEstadoMesa" ReturnType="Collection(NazResModel.sp_listarEstadoMesa_Result)">
+            <Parameter Name="codigoMesa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_listarMesas" ReturnType="Collection(NazResModel.sp_listarMesas_Result)" />
+          <FunctionImport Name="sp_listarTiposDeCambio" ReturnType="Collection(NazResModel.sp_listarTiposDeCambio_Result)" />
+          <FunctionImport Name="sp_listarTiposDeProductos" ReturnType="Collection(NazResModel.sp_listarTiposDeProductos_Result)" />
+          <FunctionImport Name="sp_productosPorTipo" ReturnType="Collection(NazResModel.sp_productosPorTipo_Result)">
+            <Parameter Name="codigoTipo" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_datosMozo_Result">
+          <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="chrNomMoz" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="chrApeMoz" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="chrCelMoz" Nullable="true" MaxLength="12" />
+          <Property Type="Binary" Name="imgFoto" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_listarAperturaCaja_Result">
+          <Property Type="DateTime" Name="dtmFecAper" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="numSoles" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="numDolares" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="chrCodUsr" Nullable="true" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="sp_listarEstadoMesa_Result">
+          <Property Type="String" Name="chrCodMesa" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="chrCodEstado" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="chrHorVen" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <ComplexType Name="sp_listarMesas_Result">
+          <Property Type="String" Name="chrCodMesa" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="chrDesMesa" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_listarTiposDeCambio_Result">
+          <Property Type="DateTime" Name="dtmTipCam" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="numTipCam" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_listarTiposDeProductos_Result">
+          <Property Type="String" Name="chrCodTipo" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="chrDesTipo" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_productosPorTipo_Result">
+          <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="chrCodGen" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="chrDesPro" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="chrComentario" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="numPrecio" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="chrCodTipo" Nullable="true" MaxLength="2" />
+          <Property Type="Byte" Name="bytHabilitado" Nullable="true" />
+          <Property Type="Int32" Name="numStockD" Nullable="true" />
+          <Property Type="Binary" Name="imgProducto" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NazResModelStoreContainer" CdmEntityContainer="NazResEntities2" >
+          <FunctionImportMapping FunctionImportName="sp_agregarTipoDeCambio" FunctionName="NazResModel.Store.sp_agregarTipoDeCambio" />
+          <FunctionImportMapping FunctionImportName="sp_aperturarCaja" FunctionName="NazResModel.Store.sp_aperturarCaja" />
+          <FunctionImportMapping FunctionImportName="sp_datosMozo" FunctionName="NazResModel.Store.sp_datosMozo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_datosMozo_Result">
+                <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />
+                <ScalarProperty Name="chrNomMoz" ColumnName="chrNomMoz" />
+                <ScalarProperty Name="chrApeMoz" ColumnName="chrApeMoz" />
+                <ScalarProperty Name="chrCelMoz" ColumnName="chrCelMoz" />
+                <ScalarProperty Name="imgFoto" ColumnName="imgFoto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_listarAperturaCaja" FunctionName="NazResModel.Store.sp_listarAperturaCaja">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_listarAperturaCaja_Result">
+                <ScalarProperty Name="dtmFecAper" ColumnName="dtmFecAper" />
+                <ScalarProperty Name="numSoles" ColumnName="numSoles" />
+                <ScalarProperty Name="numDolares" ColumnName="numDolares" />
+                <ScalarProperty Name="chrCodUsr" ColumnName="chrCodUsr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_listarEstadoMesa" FunctionName="NazResModel.Store.sp_listarEstadoMesa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_listarEstadoMesa_Result">
+                <ScalarProperty Name="chrCodMesa" ColumnName="chrCodMesa" />
+                <ScalarProperty Name="chrCodEstado" ColumnName="chrCodEstado" />
+                <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />
+                <ScalarProperty Name="chrHorVen" ColumnName="chrHorVen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_listarMesas" FunctionName="NazResModel.Store.sp_listarMesas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_listarMesas_Result">
+                <ScalarProperty Name="chrCodMesa" ColumnName="chrCodMesa" />
+                <ScalarProperty Name="chrDesMesa" ColumnName="chrDesMesa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_listarTiposDeCambio" FunctionName="NazResModel.Store.sp_listarTiposDeCambio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_listarTiposDeCambio_Result">
+                <ScalarProperty Name="dtmTipCam" ColumnName="dtmTipCam" />
+                <ScalarProperty Name="numTipCam" ColumnName="numTipCam" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_listarTiposDeProductos" FunctionName="NazResModel.Store.sp_listarTiposDeProductos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_listarTiposDeProductos_Result">
+                <ScalarProperty Name="chrCodTipo" ColumnName="chrCodTipo" />
+                <ScalarProperty Name="chrDesTipo" ColumnName="chrDesTipo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_productosPorTipo" FunctionName="NazResModel.Store.sp_productosPorTipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_productosPorTipo_Result">
+                <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+                <ScalarProperty Name="chrCodGen" ColumnName="chrCodGen" />
+                <ScalarProperty Name="chrDesPro" ColumnName="chrDesPro" />
+                <ScalarProperty Name="chrComentario" ColumnName="chrComentario" />
+                <ScalarProperty Name="numPrecio" ColumnName="numPrecio" />
+                <ScalarProperty Name="chrCodTipo" ColumnName="chrCodTipo" />
+                <ScalarProperty Name="bytHabilitado" ColumnName="bytHabilitado" />
+                <ScalarProperty Name="numStockD" ColumnName="numStockD" />
+                <ScalarProperty Name="imgProducto" ColumnName="imgProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

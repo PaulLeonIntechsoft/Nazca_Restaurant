@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NazResModelStoreContainer" CdmEntityContainer="NazResEntities2">
+    <FunctionImportMapping FunctionImportName="sp_agregarTipoDeCambio" FunctionName="NazResModel.Store.sp_agregarTipoDeCambio" />
+    <FunctionImportMapping FunctionImportName="sp_aperturarCaja" FunctionName="NazResModel.Store.sp_aperturarCaja" />
+    <FunctionImportMapping FunctionImportName="sp_datosMozo" FunctionName="NazResModel.Store.sp_datosMozo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_datosMozo_Result">
+          <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />
+          <ScalarProperty Name="chrNomMoz" ColumnName="chrNomMoz" />
+          <ScalarProperty Name="chrApeMoz" ColumnName="chrApeMoz" />
+          <ScalarProperty Name="chrCelMoz" ColumnName="chrCelMoz" />
+          <ScalarProperty Name="imgFoto" ColumnName="imgFoto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarAperturaCaja" FunctionName="NazResModel.Store.sp_listarAperturaCaja">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarAperturaCaja_Result">
+          <ScalarProperty Name="dtmFecAper" ColumnName="dtmFecAper" />
+          <ScalarProperty Name="numSoles" ColumnName="numSoles" />
+          <ScalarProperty Name="numDolares" ColumnName="numDolares" />
+          <ScalarProperty Name="chrCodUsr" ColumnName="chrCodUsr" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarEstadoMesa" FunctionName="NazResModel.Store.sp_listarEstadoMesa">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarEstadoMesa_Result">
+          <ScalarProperty Name="chrCodMesa" ColumnName="chrCodMesa" />
+          <ScalarProperty Name="chrCodEstado" ColumnName="chrCodEstado" />
+          <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />
+          <ScalarProperty Name="chrHorVen" ColumnName="chrHorVen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarMesas" FunctionName="NazResModel.Store.sp_listarMesas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarMesas_Result">
+          <ScalarProperty Name="chrCodMesa" ColumnName="chrCodMesa" />
+          <ScalarProperty Name="chrDesMesa" ColumnName="chrDesMesa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarTiposDeCambio" FunctionName="NazResModel.Store.sp_listarTiposDeCambio">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarTiposDeCambio_Result">
+          <ScalarProperty Name="dtmTipCam" ColumnName="dtmTipCam" />
+          <ScalarProperty Name="numTipCam" ColumnName="numTipCam" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarTiposDeProductos" FunctionName="NazResModel.Store.sp_listarTiposDeProductos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarTiposDeProductos_Result">
+          <ScalarProperty Name="chrCodTipo" ColumnName="chrCodTipo" />
+          <ScalarProperty Name="chrDesTipo" ColumnName="chrDesTipo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_productosPorTipo" FunctionName="NazResModel.Store.sp_productosPorTipo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_productosPorTipo_Result">
+          <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+          <ScalarProperty Name="chrCodGen" ColumnName="chrCodGen" />
+          <ScalarProperty Name="chrDesPro" ColumnName="chrDesPro" />
+          <ScalarProperty Name="chrComentario" ColumnName="chrComentario" />
+          <ScalarProperty Name="numPrecio" ColumnName="numPrecio" />
+          <ScalarProperty Name="chrCodTipo" ColumnName="chrCodTipo" />
+          <ScalarProperty Name="bytHabilitado" ColumnName="bytHabilitado" />
+          <ScalarProperty Name="numStockD" ColumnName="numStockD" />
+          <ScalarProperty Name="imgProducto" ColumnName="imgProducto" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

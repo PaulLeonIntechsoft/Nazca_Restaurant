@@ -1,0 +1,40 @@
+﻿/*Texts*/
+h2{
+    color: #ffc107;
+}
+
+/*Tablas*/
+table{
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+thead{
+    background-color: rgba(255, 255, 255, 0.15);
+    color:white;
+}
+
+tbody{
+    background-color: rgba(255, 255, 255, 0.09);
+    color: white;
+}
+
+th{
+    text-align: center;
+}
+
+tr{
+    text-align: center;
+}
+
+.table-vertical-responsive{
+    overflow-y: auto;
+    height: 54vh;
+    max-height: 500px;
+    margin-bottom: 20px;
+}
+/*Forms*/
+
+.form-group{
+    color: white;
+    background-color: #010101;
+}

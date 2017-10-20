@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nazca - Restaurant</title>
+    @Styles.Render("~/Bootstrap/Styles")
+    @Styles.Render("~/Main/Styles")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="fw-container">
+                    <img id="logoNazca" src="~/images/Nazca Rest.jpg" alt="Nazca_Restaurant_Logo" />
+                </div>
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Bootstrap/Scripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

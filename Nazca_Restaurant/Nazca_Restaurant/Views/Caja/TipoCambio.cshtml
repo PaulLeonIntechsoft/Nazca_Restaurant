@@ -1,0 +1,67 @@
+﻿@model List<Nazca_Restaurant.Models.sp_listarTiposDeCambio_Result>
+
+@{
+    ViewBag.Title = "TipoCambio";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+    ViewBag.TituloHoja = "TIPO DE CAMBIO";
+    ViewBag.TipoContainer = "container";
+}
+
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="table-vertical-responsive">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>FECHA</th>
+                        <th>DOLARES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @{ 
+                                    string fecha = String.Format("{0:dd/MM/yyyy}",item.dtmTipCam);
+                                }
+                                @fecha
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.numTipCam)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div>
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label>Fecha : </label>
+                    <input id="dtmTipCam" name="dtmTipCam" type="date" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Cambio :</label>
+                    <input id="numTipCam" name="numTipCam" class="form-control" type="text"/>
+                </div>
+                <div class="form-group">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <input id="btnGrabar" type="submit" class="btn btn-outline-warning btn-block" value="Grabar" />
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <a href="@Url.Action("Index","Home")" class="btn btn-outline-warning btn-block">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

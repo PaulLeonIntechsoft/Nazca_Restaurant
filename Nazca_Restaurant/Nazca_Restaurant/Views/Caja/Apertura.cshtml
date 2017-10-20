@@ -1,0 +1,77 @@
+﻿@model List<Nazca_Restaurant.Models.sp_listarAperturaCaja_Result>
+
+
+@{
+    ViewBag.Title = "Apertura";
+    ViewBag.TituloHoja = "APERTURA DE CAJA";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+    ViewBag.TipoContainer = "container";
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/Content/individual/aperturaStyle.css"/>
+}
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>FECHA</th>
+                    <th>SOLES</th>
+                    <th>DÓLARES</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{ 
+                                string fecha = String.Format("{0:dd/MM/yyyy}", item.dtmFecAper);
+                            }
+                            @fecha
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numSoles)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numDolares)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-md-6">
+	    <div>
+            @using (Html.BeginForm())
+            {
+			    <div class="form-group">
+                    <label>Fecha : </label>
+                    <input id="dtmFecAper" name="dtmFecAper" type="date" class="form-control"/>
+			    </div>
+                <div class="form-group">
+                    <label>Soles :</label>
+                    <input id="numSoles" name="numSoles" type="text" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Dolares :</label>
+                    <input id="numDolares" name="numDolares" type="text" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <input id="btnGrabar" type="submit" class="btn btn-outline-warning btn-block" value="Grabar"/>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <a href="@Url.Action("Index","Home")" class="btn btn-outline-warning btn-block">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+	    </div>
+    </div>
+</div>

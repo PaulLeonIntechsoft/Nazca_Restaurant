@@ -1,0 +1,86 @@
+﻿@model List<Nazca_Restaurant.Models.sp_listarTiposDeProductos_Result>
+
+@{
+    ViewBag.Title = "BuscarPlato";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+    ViewBag.TituloHoja = "BUSCAR PLATO";
+    ViewBag.TipoContainer = "container";
+}
+
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="table-vertical-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>CATEGORÍA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td id="@Html.DisplayFor(modelItem => item.chrCodTipo)" class="rowTipoProducto">
+                                @Html.DisplayFor(modelItem => item.chrDesTipo)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-12 col-md-8">
+        <div class="table-vertical-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>PLATO</th>
+                        <th>PRECIO</th>
+                        <th>STOCK</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-productos">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("td.rowTipoProducto").click(function(){
+                prueba1(this);
+            });
+        });
+    
+        function prueba1(fila) {
+            var idRow = $(fila).attr("id");
+
+            $.get("Productos_Bind", { codTipo: idRow }, function (data) {
+                var v = "";
+                $.each(data, function (i, v1) {
+                    v += "<tr ";
+                    v += "id=\"" + v1.chrCodPro + "\">";
+                    v += "<td>";
+                    v += v1.chrDesPro;
+                    v += "</td>";
+                    v += "<td>";
+                    v += v1.numPrecio;
+                    v += "</td>";
+                    v += "<td>";
+                    v += v1.numStockD;
+                    v += "</td>";
+                    v += "</tr>";
+                });
+
+                $("#tbody-productos").html(v);
+
+            });
+
+        }
+
+
+    </script>
+
+}

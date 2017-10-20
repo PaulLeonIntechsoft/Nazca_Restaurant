@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "VerMenu";
+    ViewBag.TipoContainer = "container";
+    Layout = "~/Views/Shared/_LayoutCaja.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div id="img-plato-container">
+            <img style="width: 100%" src="~/images/Nazca Rest.jpg"/>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="container-fluid">
+            <div class="row">
+                <div style="word-wrap: break-word" class="col-12 col-md-10">
+                    <h2 id="nomPlato">NOMBRE PLATO</h2>
+                    <div id="descripcionPlato-container">
+                        <p>asasdasdasasdasdasdasdasdasdasdasdasasasdasdasasdasdasd
+                        asdasdasdasdasdasasasdasdasasdasdasdasdasdasdasdasdasasasdasdasas
+                        dasdasdasdasdasdasdasdasasasdasdasasdasdasdasdasdasdasdasdasa
+                        sasdasdasasdasdasdasdasdasdasdasdasasasdasdasasdasdasdasdasdas
+                        dasdasdasasasdasdasasdasdasdasdasdasdasdasdas</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2">
+                    <h3 id="nroPlatosVendidos">
+                        5
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>CATEGORIA</th>
+                        <th>PLATO</th>
+                        <th>PRECIO</th>
+                        <th>STOCK</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-menus">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

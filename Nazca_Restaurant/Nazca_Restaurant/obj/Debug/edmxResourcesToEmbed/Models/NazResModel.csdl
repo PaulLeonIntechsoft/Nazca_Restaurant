@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NazResModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="NazResEntities2" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_agregarTipoDeCambio">
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="valorCambio" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="sp_aperturarCaja">
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="soles" Mode="In" Type="Decimal" />
+      <Parameter Name="dolares" Mode="In" Type="Decimal" />
+      <Parameter Name="usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_datosMozo" ReturnType="Collection(NazResModel.sp_datosMozo_Result)">
+      <Parameter Name="codigoMozo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_listarAperturaCaja" ReturnType="Collection(NazResModel.sp_listarAperturaCaja_Result)" />
+    <FunctionImport Name="sp_listarEstadoMesa" ReturnType="Collection(NazResModel.sp_listarEstadoMesa_Result)">
+      <Parameter Name="codigoMesa" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_listarMesas" ReturnType="Collection(NazResModel.sp_listarMesas_Result)" />
+    <FunctionImport Name="sp_listarTiposDeCambio" ReturnType="Collection(NazResModel.sp_listarTiposDeCambio_Result)" />
+    <FunctionImport Name="sp_listarTiposDeProductos" ReturnType="Collection(NazResModel.sp_listarTiposDeProductos_Result)" />
+    <FunctionImport Name="sp_productosPorTipo" ReturnType="Collection(NazResModel.sp_productosPorTipo_Result)">
+      <Parameter Name="codigoTipo" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_datosMozo_Result">
+    <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrNomMoz" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="chrApeMoz" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="chrCelMoz" Nullable="true" MaxLength="12" />
+    <Property Type="Binary" Name="imgFoto" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_listarAperturaCaja_Result">
+    <Property Type="DateTime" Name="dtmFecAper" Nullable="true" Precision="23" />
+    <Property Type="Decimal" Name="numSoles" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="numDolares" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="chrCodUsr" Nullable="true" MaxLength="15" />
+  </ComplexType>
+  <ComplexType Name="sp_listarEstadoMesa_Result">
+    <Property Type="String" Name="chrCodMesa" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrCodEstado" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrHorVen" Nullable="false" MaxLength="5" />
+  </ComplexType>
+  <ComplexType Name="sp_listarMesas_Result">
+    <Property Type="String" Name="chrCodMesa" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrDesMesa" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="sp_listarTiposDeCambio_Result">
+    <Property Type="DateTime" Name="dtmTipCam" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="numTipCam" Nullable="false" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_listarTiposDeProductos_Result">
+    <Property Type="String" Name="chrCodTipo" Nullable="false" MaxLength="2" />
+    <Property Type="String" Name="chrDesTipo" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_productosPorTipo_Result">
+    <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="chrCodGen" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrDesPro" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="chrComentario" Nullable="true" MaxLength="500" />
+    <Property Type="Decimal" Name="numPrecio" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="chrCodTipo" Nullable="true" MaxLength="2" />
+    <Property Type="Byte" Name="bytHabilitado" Nullable="true" />
+    <Property Type="Int32" Name="numStockD" Nullable="true" />
+    <Property Type="Binary" Name="imgProducto" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+</Schema>

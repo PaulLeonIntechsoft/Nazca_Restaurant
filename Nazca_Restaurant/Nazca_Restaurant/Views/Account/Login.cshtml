@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Nazca Restaurant";
+}
+
+<div class="row">
+    <div class="col-1 col-sm-1 col-md-2 col-lg-3 col-xl-2">
+    </div>
+    <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-8">
+        <div>
+            <form>
+                <div class="form-group">
+                    <label for="txtUsuario" class="sr-only">Usuario</label>
+                    <input id="txtUsuario" type="text" class="form-control text-center" placeholder="Usuario" />
+                </div>
+                <div class="form-group">
+                    <label for="txtContrasena" class="sr-only">Contraseña</label>
+                    <input id="txtContrasena" type="password" class="form-control text-center" placeholder="Contraseña" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-outline-warning btn-block" id="btnIngresar" value="Ingresar" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
