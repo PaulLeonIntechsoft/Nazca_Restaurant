@@ -42,6 +42,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarMozos" FunctionName="NazResModel.Store.sp_listarMozos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarMozos_Result">
+          <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />
+          <ScalarProperty Name="chrNomMoz" ColumnName="chrNomMoz" />
+          <ScalarProperty Name="chrApeMoz" ColumnName="chrApeMoz" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_listarTiposDeCambio" FunctionName="NazResModel.Store.sp_listarTiposDeCambio">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NazResModel.sp_listarTiposDeCambio_Result">

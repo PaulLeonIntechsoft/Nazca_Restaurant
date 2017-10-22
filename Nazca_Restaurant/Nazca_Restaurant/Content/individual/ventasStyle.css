@@ -1,0 +1,11 @@
+﻿#listaMesas{
+    overflow-x: auto;
+    height: 90vh;
+    max-height: 625px;
+}
+
+#table-menu-container{
+    overflow-x: auto;
+    height: 50vh;
+    max-height: 500px;
+}

@@ -90,6 +90,11 @@ namespace Nazca_Restaurant.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarMesas_Result>("sp_listarMesas");
         }
     
+        public virtual ObjectResult<sp_listarMozos_Result> sp_listarMozos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarMozos_Result>("sp_listarMozos");
+        }
+    
         public virtual ObjectResult<sp_listarTiposDeCambio_Result> sp_listarTiposDeCambio()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarTiposDeCambio_Result>("sp_listarTiposDeCambio");

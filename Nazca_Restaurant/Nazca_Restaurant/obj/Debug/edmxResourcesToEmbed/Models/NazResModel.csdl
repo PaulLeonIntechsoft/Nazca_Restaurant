@@ -19,6 +19,7 @@
       <Parameter Name="codigoMesa" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_listarMesas" ReturnType="Collection(NazResModel.sp_listarMesas_Result)" />
+    <FunctionImport Name="sp_listarMozos" ReturnType="Collection(NazResModel.sp_listarMozos_Result)" />
     <FunctionImport Name="sp_listarTiposDeCambio" ReturnType="Collection(NazResModel.sp_listarTiposDeCambio_Result)" />
     <FunctionImport Name="sp_listarTiposDeProductos" ReturnType="Collection(NazResModel.sp_listarTiposDeProductos_Result)" />
     <FunctionImport Name="sp_productosPorTipo" ReturnType="Collection(NazResModel.sp_productosPorTipo_Result)">
@@ -47,6 +48,11 @@
   <ComplexType Name="sp_listarMesas_Result">
     <Property Type="String" Name="chrCodMesa" Nullable="false" MaxLength="5" />
     <Property Type="String" Name="chrDesMesa" Nullable="false" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="sp_listarMozos_Result">
+    <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrNomMoz" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="chrApeMoz" Nullable="false" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="sp_listarTiposDeCambio_Result">
     <Property Type="DateTime" Name="dtmTipCam" Nullable="false" Precision="23" />

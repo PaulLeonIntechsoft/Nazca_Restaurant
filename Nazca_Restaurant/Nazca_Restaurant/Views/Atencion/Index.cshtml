@@ -1,34 +1,158 @@
-﻿
+﻿@model List<Nazca_Restaurant.Models.sp_listarMesas_Result>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutCaja.cshtml";
     ViewBag.TipoContainer = "container-fluid";
+    int n = 1;
 }
 
 @section styles{
 
-    <style>
-        #listaMesas{
-            overflow-x: auto;
-            max-height: 70vh;
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/individual/ventasStyle.css"/>
     
 }
 
 <div class="row">
     <div class="col-3">
         <div id="listaMesas">
+            <div id="accordion" role="tablist">
+                @foreach (var item in Model)
+                {
+                    string idvar = "heading" + n;
+                    string hrefvar = "#collapse" + n;
+                    string ariavar = "collapse" + n;
+                    string texto = "texto" + n;
 
+                    <div id="@item.chrCodMesa.Trim()" class="card text-white border-light bg-info">
+                        <div class="card-header" role="tab" id="@idvar">
+                            <h5 class="mb-0">
+                                <a class="link-descriptivo text-white collapsed" data-toggle="collapse" href="@hrefvar" aria-expanded="false" aria-controls="@ariavar">
+                                    @item.chrDesMesa
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="@ariavar" class="bodyCartaContainer collapse" role="tabpanel" aria-labelledby="@idvar" data-parent="#accordion">
+                            <div id="@texto" class="card-body">
+                            </div>
+                        </div>
+                    </div>
+
+                    n++;
+                }
+            </div>
         </div>
     </div>
-    <div class="col-9">
+    <div id="avisoSeleccioneMesa" class="col-9">
+        <h2 class="text-white text-center">SELECCIONE MESA</h2>
+    </div>
+    <div id="avisoDeVacio" class="col-9" style="display:none">
+        <h2 class="text-center text-white">Mesa vacía.</h2>
+        <div class="fw-container text-center">
+            <figure class="figure">
+                <img class="figure-img" src="~/images/anadirMenu.png"/>
+                <figcaption class="figure-caption text-white font-weight-light">AGREGAR MENÚ</figcaption>
+            </figure>
+        </div>
+    </div>
+    <div id="tablaVenta" class="col-9" style="display:none">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label col-form-label-sm">Seleccione Mozo : </label>
+                        <div class="col-3">
+                            <select id="cboMozos" name="cboMozos" class="custom-select custom-select-sm">
+                                <option value="" selected> -- Seleccionar -- </option>
+                                @foreach (var item in ViewBag.Mozos)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="table-menu-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cod.</th>
+                                    <th>Nombre</th>
+                                    <th>Comentario</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                    <th>OK</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-menu">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
 
+                </div>
+                <div class="col-6">
+                    <div class="form-group row">
+                        <label class="col-5 col-form-label col-form-label-sm">Sub Total : </label>
+                        <div class="col-7">
+                            <input type="text" class="form-control form-control-sm"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-5 col-form-label col-form-label-sm">IGV : </label>
+                        <div class="col-7">
+                            <input type="text" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-5 col-form-label col-form-label-sm">Total (S/.) : </label>
+                        <div class="col-7">
+                            <input type="text" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-5 col-form-label col-form-label-sm">Total (USD.) : </label>
+                        <div class="col-7">
+                            <input type="text" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalConfirmarSalida" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
     </div>
 </div>
 
 @section scripts{
     
     <script src="~/Scripts/Individual/listadoMesas.js"></script>
+    <script src="~/Scripts/Individual/datosTablas.js"></script>
     
 }

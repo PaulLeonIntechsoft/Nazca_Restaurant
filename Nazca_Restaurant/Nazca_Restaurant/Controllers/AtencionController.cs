@@ -15,7 +15,12 @@ namespace Nazca_Restaurant.Controllers
 
         public ActionResult Index()
         {
-           return View();
+
+            List<sp_listarMesas_Result> listaMesasBase = new List<Models.sp_listarMesas_Result>();
+            listaMesasBase = this._databaseManager.sp_listarMesas().ToList();
+            listarEmpleados();
+
+            return View(listaMesasBase);
         }
 
         public JsonResult MesasBind()
@@ -78,5 +83,25 @@ namespace Nazca_Restaurant.Controllers
                 throw;
             }
         }
+
+        public void listarEmpleados()
+        {
+            List<sp_listarMozos_Result> listaBase = new List<sp_listarMozos_Result>();
+            listaBase = this._databaseManager.sp_listarMozos().ToList();
+
+            List<SelectListItem> listaSalida = new List<SelectListItem>();
+
+            foreach (var item in listaBase)
+            {
+                listaSalida.Add(new SelectListItem {
+                                        Text = item.chrApeMoz + " " + item.chrNomMoz,
+                                        Value = item.chrCodMoz.Trim()
+                                });
+            }
+
+            ViewBag.Mozos = listaSalida;
+
+        }
+
     }
 }

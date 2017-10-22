@@ -237,6 +237,9 @@
     <Compile Include="Models\sp_listarMesas_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_listarMozos_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_listarTiposDeCambio_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
@@ -261,6 +264,7 @@
     <Content Include="Content\bootstrap-4.0.0-beta\dist\js\bootstrap.min.js" />
     <Content Include="Content\individual\aperturaStyle.css" />
     <Content Include="Content\individual\mainStyle.css" />
+    <Content Include="Content\individual\ventasStyle.css" />
     <Content Include="Content\reStyleBootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -278,6 +282,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NazResModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="images\anadirMenu.png" />
     <Content Include="Models\NazResModel.edmx.diagram">
       <DependentUpon>NazResModel.edmx</DependentUpon>
     </Content>
@@ -293,6 +298,7 @@
       <DependentUpon>NazResModel.edmx</DependentUpon>
       <LastGenOutput>NazResModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Individual\datosTablas.js" />
     <Content Include="Scripts\Individual\listadoMesas.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
