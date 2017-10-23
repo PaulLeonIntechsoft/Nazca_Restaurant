@@ -202,6 +202,7 @@
     <Compile Include="Controllers\AtencionController.cs" />
     <Compile Include="Controllers\CajaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Internal\Menu.cs" />
     <Compile Include="Models\Internal\Mesas.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
@@ -228,7 +229,13 @@
     <Compile Include="Models\sp_datosMozo_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_lisarDetalleVenta_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_listarAperturaCaja_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_listarDatosVentas_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_listarEstadoMesa_Result.cs">
@@ -278,11 +285,11 @@
     <Content Include="Content\bootstrap-4.0.0-beta\dist\css\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-4.0.0-beta\dist\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap-4.0.0-beta\dist\css\bootstrap.min.css.map" />
+    <Content Include="images\anadirMenu.png" />
     <EntityDeploy Include="Models\NazResModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NazResModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="images\anadirMenu.png" />
     <Content Include="Models\NazResModel.edmx.diagram">
       <DependentUpon>NazResModel.edmx</DependentUpon>
     </Content>
@@ -298,6 +305,7 @@
       <DependentUpon>NazResModel.edmx</DependentUpon>
       <LastGenOutput>NazResModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Individual\datosDeBase.js" />
     <Content Include="Scripts\Individual\datosTablas.js" />
     <Content Include="Scripts\Individual\listadoMesas.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />

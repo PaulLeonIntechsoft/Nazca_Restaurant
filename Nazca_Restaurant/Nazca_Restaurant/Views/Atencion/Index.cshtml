@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="~/Content/individual/ventasStyle.css"/>
     
 }
-
+<input id="modoVentana" type="hidden" value=""/>
 <div class="row">
     <div class="col-3">
         <div id="listaMesas">
@@ -50,7 +50,7 @@
     <div id="avisoDeVacio" class="col-9" style="display:none">
         <h2 class="text-center text-white">Mesa vacía.</h2>
         <div class="fw-container text-center">
-            <figure class="figure">
+            <figure id="img-agregar" class="figure">
                 <img class="figure-img" src="~/images/anadirMenu.png"/>
                 <figcaption class="figure-caption text-white font-weight-light">AGREGAR MENÚ</figcaption>
             </figure>
@@ -60,7 +60,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group row">
+                    <div id="cboContainer" class="form-group row">
                         <label class="col-2 col-form-label col-form-label-sm">Seleccione Mozo : </label>
                         <div class="col-3">
                             <select id="cboMozos" name="cboMozos" class="custom-select custom-select-sm">
@@ -140,11 +140,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                ¿Desea cancelar la venta?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Aceptar</button>
+                <button id="confirmarSalidaButton" type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
             </div>
         </div>
     </div>
@@ -154,5 +154,6 @@
     
     <script src="~/Scripts/Individual/listadoMesas.js"></script>
     <script src="~/Scripts/Individual/datosTablas.js"></script>
+<script src="~/Scripts/Individual/datosDeBase.js"></script>
     
 }

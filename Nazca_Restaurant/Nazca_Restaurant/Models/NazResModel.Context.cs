@@ -71,9 +71,27 @@ namespace Nazca_Restaurant.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_datosMozo_Result>("sp_datosMozo", codigoMozoParameter);
         }
     
+        public virtual ObjectResult<sp_lisarDetalleVenta_Result> sp_lisarDetalleVenta(Nullable<int> codigoVenta)
+        {
+            var codigoVentaParameter = codigoVenta.HasValue ?
+                new ObjectParameter("codigoVenta", codigoVenta) :
+                new ObjectParameter("codigoVenta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_lisarDetalleVenta_Result>("sp_lisarDetalleVenta", codigoVentaParameter);
+        }
+    
         public virtual ObjectResult<sp_listarAperturaCaja_Result> sp_listarAperturaCaja()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarAperturaCaja_Result>("sp_listarAperturaCaja");
+        }
+    
+        public virtual ObjectResult<sp_listarDatosVentas_Result> sp_listarDatosVentas(Nullable<int> codigoVenta)
+        {
+            var codigoVentaParameter = codigoVenta.HasValue ?
+                new ObjectParameter("codigoVenta", codigoVenta) :
+                new ObjectParameter("codigoVenta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarDatosVentas_Result>("sp_listarDatosVentas", codigoVentaParameter);
         }
     
         public virtual ObjectResult<sp_listarEstadoMesa_Result> sp_listarEstadoMesa(string codigoMesa)

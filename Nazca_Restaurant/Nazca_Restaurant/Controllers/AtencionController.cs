@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Nazca_Restaurant.Models;
+using Nazca_Restaurant.Models.Internal;
 using Nazca_Restaurant.Controllers.Internal;
 
 namespace Nazca_Restaurant.Controllers
@@ -84,6 +85,58 @@ namespace Nazca_Restaurant.Controllers
             }
         }
 
+        public JsonResult MenuBind(String idMesa)
+        {
+            try
+            {
+                Menu menuCompleto = new Menu();
+                int nroV = 0;
+                List<sp_lisarDetalleVenta_Result> listaBase = new List<sp_lisarDetalleVenta_Result>();
+                List<sp_listarEstadoMesa_Result> listaEstadoMesas = new List<sp_listarEstadoMesa_Result>();
+                listaEstadoMesas = this._databaseManager.sp_listarEstadoMesa(idMesa).ToList();
+
+                if (listaEstadoMesas.Count > 0)
+                {
+                    sp_listarEstadoMesa_Result estadoUnico = listaEstadoMesas.First();
+                    nroV = Convert.ToInt32(estadoUnico.intNroVen);
+                    listaBase = this._databaseManager.sp_lisarDetalleVenta(nroV).ToList();
+                } else
+                {
+                    listaBase = null;
+                }
+
+                List<sp_listarDatosVentas_Result> listaDatoBase = new List<sp_listarDatosVentas_Result>();
+                listaDatoBase = this._databaseManager.sp_listarDatosVentas(nroV).ToList();
+
+                if (listaDatoBase.Count > 0)
+                {
+                    sp_listarDatosVentas_Result datosVentaSolo = listaDatoBase.First();
+                    menuCompleto.datosVenta = datosVentaSolo;
+                }
+                else
+                {
+                    menuCompleto.datosVenta = null;
+                }
+
+                if (listaBase != null)
+                {
+                    menuCompleto.detallesVenta = listaBase;
+                }
+                else
+                {
+                    menuCompleto.detallesVenta = null;
+                }
+                
+                return Json(menuCompleto, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+                throw;
+            }
+
+        }
+
         public void listarEmpleados()
         {
             List<sp_listarMozos_Result> listaBase = new List<sp_listarMozos_Result>();
@@ -102,6 +155,7 @@ namespace Nazca_Restaurant.Controllers
             ViewBag.Mozos = listaSalida;
 
         }
+
 
     }
 }

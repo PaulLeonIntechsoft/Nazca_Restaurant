@@ -14,6 +14,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_lisarDetalleVenta" FunctionName="NazResModel.Store.sp_lisarDetalleVenta">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_lisarDetalleVenta_Result">
+          <ScalarProperty Name="intNroVen" ColumnName="intNroVen" />
+          <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+          <ScalarProperty Name="chrComPro" ColumnName="chrComPro" />
+          <ScalarProperty Name="intCanPro" ColumnName="intCanPro" />
+          <ScalarProperty Name="numPreVen" ColumnName="numPreVen" />
+          <ScalarProperty Name="chrHorCoc" ColumnName="chrHorCoc" />
+          <ScalarProperty Name="bytOrden" ColumnName="bytOrden" />
+          <ScalarProperty Name="bytAteCoc" ColumnName="bytAteCoc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_listarAperturaCaja" FunctionName="NazResModel.Store.sp_listarAperturaCaja">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NazResModel.sp_listarAperturaCaja_Result">
@@ -24,9 +38,29 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarDatosVentas" FunctionName="NazResModel.Store.sp_listarDatosVentas">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarDatosVentas_Result">
+          <ScalarProperty Name="intNroVen" ColumnName="intNroVen" />
+          <ScalarProperty Name="dtmFecVen" ColumnName="dtmFecVen" />
+          <ScalarProperty Name="chrCodMesa" ColumnName="chrCodMesa" />
+          <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />
+          <ScalarProperty Name="chrHorVen" ColumnName="chrHorVen" />
+          <ScalarProperty Name="chrFinVen" ColumnName="chrFinVen" />
+          <ScalarProperty Name="bytPagTar" ColumnName="bytPagTar" />
+          <ScalarProperty Name="bytPropina" ColumnName="bytPropina" />
+          <ScalarProperty Name="numPropina" ColumnName="numPropina" />
+          <ScalarProperty Name="numSTotal" ColumnName="numSTotal" />
+          <ScalarProperty Name="chrForPag" ColumnName="chrForPag" />
+          <ScalarProperty Name="chrCodUsr" ColumnName="chrCodUsr" />
+          <ScalarProperty Name="chrCodEstado" ColumnName="chrCodEstado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_listarEstadoMesa" FunctionName="NazResModel.Store.sp_listarEstadoMesa">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NazResModel.sp_listarEstadoMesa_Result">
+          <ScalarProperty Name="intNroVen" ColumnName="intNroVen" />
           <ScalarProperty Name="chrCodMesa" ColumnName="chrCodMesa" />
           <ScalarProperty Name="chrCodEstado" ColumnName="chrCodEstado" />
           <ScalarProperty Name="chrCodMoz" ColumnName="chrCodMoz" />

@@ -11,12 +11,20 @@ namespace Nazca_Restaurant.Models
 {
     using System;
     
-    public partial class sp_listarEstadoMesa_Result
+    public partial class sp_listarDatosVentas_Result
     {
         public int intNroVen { get; set; }
+        public System.DateTime dtmFecVen { get; set; }
         public string chrCodMesa { get; set; }
-        public string chrCodEstado { get; set; }
         public string chrCodMoz { get; set; }
         public string chrHorVen { get; set; }
+        public string chrFinVen { get; set; }
+        public byte bytPagTar { get; set; }
+        public byte bytPropina { get; set; }
+        public Nullable<decimal> numPropina { get; set; }
+        public Nullable<decimal> numSTotal { get; set; }
+        public string chrForPag { get; set; }
+        public string chrCodUsr { get; set; }
+        public string chrCodEstado { get; set; }
     }
 }
