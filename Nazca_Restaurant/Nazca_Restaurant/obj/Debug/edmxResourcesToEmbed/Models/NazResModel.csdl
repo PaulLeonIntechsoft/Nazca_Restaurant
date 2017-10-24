@@ -5,14 +5,58 @@
       <Parameter Name="fecha" Mode="In" Type="String" />
       <Parameter Name="valorCambio" Mode="In" Type="Decimal" />
     </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
     <FunctionImport Name="sp_aperturarCaja">
       <Parameter Name="fecha" Mode="In" Type="String" />
       <Parameter Name="soles" Mode="In" Type="Decimal" />
       <Parameter Name="dolares" Mode="In" Type="Decimal" />
       <Parameter Name="usuario" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
     <FunctionImport Name="sp_datosMozo" ReturnType="Collection(NazResModel.sp_datosMozo_Result)">
       <Parameter Name="codigoMozo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_datosProducto" ReturnType="Collection(NazResModel.sp_datosProducto_Result)">
+      <Parameter Name="codigoProducto" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NazResModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NazResModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insertarDetalleVenta">
+      <Parameter Name="numeroVenta" Mode="In" Type="Int32" />
+      <Parameter Name="codigoProducto" Mode="In" Type="String" />
+      <Parameter Name="comentarioProducto" Mode="In" Type="String" />
+      <Parameter Name="cantidadProductos" Mode="In" Type="Int16" />
+      <Parameter Name="ordenEnVenta" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="sp_insertarVenta">
+      <Parameter Name="codigoMesa" Mode="In" Type="String" />
+      <Parameter Name="codigoMozo" Mode="In" Type="String" />
+      <Parameter Name="pagoTarjeta" Mode="In" Type="String" />
+      <Parameter Name="recibePropina" Mode="In" Type="String" />
+      <Parameter Name="montoPropina" Mode="In" Type="Decimal" />
+      <Parameter Name="montoTotal" Mode="In" Type="Decimal" />
+      <Parameter Name="formaPago" Mode="In" Type="String" />
+      <Parameter Name="codigoUsuario" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_lisarDetalleVenta" ReturnType="Collection(NazResModel.sp_lisarDetalleVenta_Result)">
       <Parameter Name="codigoVenta" Mode="In" Type="Int32" />
@@ -28,9 +72,19 @@
     <FunctionImport Name="sp_listarMozos" ReturnType="Collection(NazResModel.sp_listarMozos_Result)" />
     <FunctionImport Name="sp_listarTiposDeCambio" ReturnType="Collection(NazResModel.sp_listarTiposDeCambio_Result)" />
     <FunctionImport Name="sp_listarTiposDeProductos" ReturnType="Collection(NazResModel.sp_listarTiposDeProductos_Result)" />
+    <FunctionImport Name="sp_login" ReturnType="Collection(NazResModel.sp_login_Result)">
+      <Parameter Name="usuario" Mode="In" Type="String" />
+      <Parameter Name="contrasena" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="sp_productosPorTipo" ReturnType="Collection(NazResModel.sp_productosPorTipo_Result)">
       <Parameter Name="codigoTipo" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
   <ComplexType Name="sp_datosMozo_Result">
     <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
@@ -39,9 +93,32 @@
     <Property Type="String" Name="chrCelMoz" Nullable="true" MaxLength="12" />
     <Property Type="Binary" Name="imgFoto" Nullable="true" MaxLength="Max" />
   </ComplexType>
+  <ComplexType Name="sp_datosProducto_Result">
+    <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="chrCodGen" Nullable="false" MaxLength="5" />
+    <Property Type="String" Name="chrDesPro" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="chrComentario" Nullable="true" MaxLength="500" />
+    <Property Type="Decimal" Name="numPrecio" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="chrCodTipo" Nullable="true" MaxLength="2" />
+    <Property Type="Byte" Name="bytHabilitado" Nullable="true" />
+    <Property Type="Int32" Name="numStockD" Nullable="true" />
+    <Property Type="Binary" Name="imgProducto" Nullable="true" MaxLength="Max" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
   <ComplexType Name="sp_lisarDetalleVenta_Result">
     <Property Type="Int32" Name="intNroVen" Nullable="false" />
     <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="chrDesPro" Nullable="false" MaxLength="200" />
     <Property Type="String" Name="chrComPro" Nullable="true" MaxLength="100" />
     <Property Type="Int16" Name="intCanPro" Nullable="false" />
     <Property Type="Decimal" Name="numPreVen" Nullable="false" Precision="18" Scale="2" />
@@ -93,6 +170,11 @@
   <ComplexType Name="sp_listarTiposDeProductos_Result">
     <Property Type="String" Name="chrCodTipo" Nullable="false" MaxLength="2" />
     <Property Type="String" Name="chrDesTipo" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_login_Result">
+    <Property Type="String" Name="chrCodUsr" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="chrNomUsr" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="chrAcceso" Nullable="true" MaxLength="10" />
   </ComplexType>
   <ComplexType Name="sp_productosPorTipo_Result">
     <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Nazca_Restaurant.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

@@ -5,9 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="NazResModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_agregarTipoDeCambio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fecha" Type="varchar" Mode="In" />
           <Parameter Name="valorCambio" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
         </Function>
         <Function Name="sp_aperturarCaja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="fecha" Type="varchar" Mode="In" />
@@ -15,8 +22,46 @@
           <Parameter Name="dolares" Type="numeric" Mode="In" />
           <Parameter Name="usuario" Type="char" Mode="In" />
         </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
         <Function Name="sp_datosMozo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigoMozo" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_datosProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigoProducto" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_insertarDetalleVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numeroVenta" Type="int" Mode="In" />
+          <Parameter Name="codigoProducto" Type="char" Mode="In" />
+          <Parameter Name="comentarioProducto" Type="varchar" Mode="In" />
+          <Parameter Name="cantidadProductos" Type="smallint" Mode="In" />
+          <Parameter Name="ordenEnVenta" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="sp_insertarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigoMesa" Type="char" Mode="In" />
+          <Parameter Name="codigoMozo" Type="char" Mode="In" />
+          <Parameter Name="pagoTarjeta" Type="char" Mode="In" />
+          <Parameter Name="recibePropina" Type="char" Mode="In" />
+          <Parameter Name="montoPropina" Type="numeric" Mode="In" />
+          <Parameter Name="montoTotal" Type="numeric" Mode="In" />
+          <Parameter Name="formaPago" Type="char" Mode="In" />
+          <Parameter Name="codigoUsuario" Type="char" Mode="In" />
         </Function>
         <Function Name="sp_lisarDetalleVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigoVenta" Type="int" Mode="In" />
@@ -32,9 +77,19 @@
         <Function Name="sp_listarMozos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_listarTiposDeCambio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_listarTiposDeProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario" Type="varchar" Mode="In" />
+          <Parameter Name="contrasena" Type="char" Mode="In" />
+        </Function>
         <Function Name="sp_productosPorTipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigoTipo" Type="char" Mode="In" />
         </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="NazResModelStoreContainer" />
       </Schema>
     </edmx:StorageModels>
@@ -46,14 +101,58 @@
             <Parameter Name="fecha" Mode="In" Type="String" />
             <Parameter Name="valorCambio" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
           <FunctionImport Name="sp_aperturarCaja">
             <Parameter Name="fecha" Mode="In" Type="String" />
             <Parameter Name="soles" Mode="In" Type="Decimal" />
             <Parameter Name="dolares" Mode="In" Type="Decimal" />
             <Parameter Name="usuario" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
           <FunctionImport Name="sp_datosMozo" ReturnType="Collection(NazResModel.sp_datosMozo_Result)">
             <Parameter Name="codigoMozo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_datosProducto" ReturnType="Collection(NazResModel.sp_datosProducto_Result)">
+            <Parameter Name="codigoProducto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NazResModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NazResModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insertarDetalleVenta">
+            <Parameter Name="numeroVenta" Mode="In" Type="Int32" />
+            <Parameter Name="codigoProducto" Mode="In" Type="String" />
+            <Parameter Name="comentarioProducto" Mode="In" Type="String" />
+            <Parameter Name="cantidadProductos" Mode="In" Type="Int16" />
+            <Parameter Name="ordenEnVenta" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="sp_insertarVenta">
+            <Parameter Name="codigoMesa" Mode="In" Type="String" />
+            <Parameter Name="codigoMozo" Mode="In" Type="String" />
+            <Parameter Name="pagoTarjeta" Mode="In" Type="String" />
+            <Parameter Name="recibePropina" Mode="In" Type="String" />
+            <Parameter Name="montoPropina" Mode="In" Type="Decimal" />
+            <Parameter Name="montoTotal" Mode="In" Type="Decimal" />
+            <Parameter Name="formaPago" Mode="In" Type="String" />
+            <Parameter Name="codigoUsuario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_lisarDetalleVenta" ReturnType="Collection(NazResModel.sp_lisarDetalleVenta_Result)">
             <Parameter Name="codigoVenta" Mode="In" Type="Int32" />
@@ -69,9 +168,19 @@
           <FunctionImport Name="sp_listarMozos" ReturnType="Collection(NazResModel.sp_listarMozos_Result)" />
           <FunctionImport Name="sp_listarTiposDeCambio" ReturnType="Collection(NazResModel.sp_listarTiposDeCambio_Result)" />
           <FunctionImport Name="sp_listarTiposDeProductos" ReturnType="Collection(NazResModel.sp_listarTiposDeProductos_Result)" />
+          <FunctionImport Name="sp_login" ReturnType="Collection(NazResModel.sp_login_Result)">
+            <Parameter Name="usuario" Mode="In" Type="String" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_productosPorTipo" ReturnType="Collection(NazResModel.sp_productosPorTipo_Result)">
             <Parameter Name="codigoTipo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <ComplexType Name="sp_datosMozo_Result">
           <Property Type="String" Name="chrCodMoz" Nullable="false" MaxLength="5" />
@@ -80,9 +189,32 @@
           <Property Type="String" Name="chrCelMoz" Nullable="true" MaxLength="12" />
           <Property Type="Binary" Name="imgFoto" Nullable="true" MaxLength="Max" />
         </ComplexType>
+        <ComplexType Name="sp_datosProducto_Result">
+          <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="chrCodGen" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="chrDesPro" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="chrComentario" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="numPrecio" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="chrCodTipo" Nullable="true" MaxLength="2" />
+          <Property Type="Byte" Name="bytHabilitado" Nullable="true" />
+          <Property Type="Int32" Name="numStockD" Nullable="true" />
+          <Property Type="Binary" Name="imgProducto" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sp_lisarDetalleVenta_Result">
           <Property Type="Int32" Name="intNroVen" Nullable="false" />
           <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="chrDesPro" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="chrComPro" Nullable="true" MaxLength="100" />
           <Property Type="Int16" Name="intCanPro" Nullable="false" />
           <Property Type="Decimal" Name="numPreVen" Nullable="false" Precision="18" Scale="2" />
@@ -135,6 +267,11 @@
           <Property Type="String" Name="chrCodTipo" Nullable="false" MaxLength="2" />
           <Property Type="String" Name="chrDesTipo" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="sp_login_Result">
+          <Property Type="String" Name="chrCodUsr" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="chrNomUsr" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="chrAcceso" Nullable="true" MaxLength="10" />
+        </ComplexType>
         <ComplexType Name="sp_productosPorTipo_Result">
           <Property Type="String" Name="chrCodPro" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="chrCodGen" Nullable="false" MaxLength="5" />
@@ -153,7 +290,9 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NazResModelStoreContainer" CdmEntityContainer="NazResEntities2" >
           <FunctionImportMapping FunctionImportName="sp_agregarTipoDeCambio" FunctionName="NazResModel.Store.sp_agregarTipoDeCambio" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="NazResModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_aperturarCaja" FunctionName="NazResModel.Store.sp_aperturarCaja" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="NazResModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_datosMozo" FunctionName="NazResModel.Store.sp_datosMozo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NazResModel.sp_datosMozo_Result">
@@ -165,11 +304,49 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_datosProducto" FunctionName="NazResModel.Store.sp_datosProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_datosProducto_Result">
+                <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+                <ScalarProperty Name="chrCodGen" ColumnName="chrCodGen" />
+                <ScalarProperty Name="chrDesPro" ColumnName="chrDesPro" />
+                <ScalarProperty Name="chrComentario" ColumnName="chrComentario" />
+                <ScalarProperty Name="numPrecio" ColumnName="numPrecio" />
+                <ScalarProperty Name="chrCodTipo" ColumnName="chrCodTipo" />
+                <ScalarProperty Name="bytHabilitado" ColumnName="bytHabilitado" />
+                <ScalarProperty Name="numStockD" ColumnName="numStockD" />
+                <ScalarProperty Name="imgProducto" ColumnName="imgProducto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="NazResModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="NazResModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="NazResModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_insertarDetalleVenta" FunctionName="NazResModel.Store.sp_insertarDetalleVenta" />
+          <FunctionImportMapping FunctionImportName="sp_insertarVenta" FunctionName="NazResModel.Store.sp_insertarVenta" />
           <FunctionImportMapping FunctionImportName="sp_lisarDetalleVenta" FunctionName="NazResModel.Store.sp_lisarDetalleVenta">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NazResModel.sp_lisarDetalleVenta_Result">
                 <ScalarProperty Name="intNroVen" ColumnName="intNroVen" />
                 <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+                <ScalarProperty Name="chrDesPro" ColumnName="chrDesPro" />
                 <ScalarProperty Name="chrComPro" ColumnName="chrComPro" />
                 <ScalarProperty Name="intCanPro" ColumnName="intCanPro" />
                 <ScalarProperty Name="numPreVen" ColumnName="numPreVen" />
@@ -252,6 +429,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_login" FunctionName="NazResModel.Store.sp_login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_login_Result">
+                <ScalarProperty Name="chrCodUsr" ColumnName="chrCodUsr" />
+                <ScalarProperty Name="chrNomUsr" ColumnName="chrNomUsr" />
+                <ScalarProperty Name="chrAcceso" ColumnName="chrAcceso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_productosPorTipo" FunctionName="NazResModel.Store.sp_productosPorTipo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NazResModel.sp_productosPorTipo_Result">
@@ -267,6 +453,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NazResModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="NazResModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

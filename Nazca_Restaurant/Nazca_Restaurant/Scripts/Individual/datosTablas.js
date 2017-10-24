@@ -1,16 +1,19 @@
 ﻿$(document).ready(function () {
 
+    $("a").click(function () {
+        var tipoVentana = $("#modoVentana").val();
+        var mozoElegido = $("#cboMozos").val();
+        if (tipoVentana == "ventaNueva") {
+            if(mozoElegido != ""){
+                return false;
+            }
+        };
+    });
+
     $(".link-descriptivo").click(function () {
         var descriptivo = $(this).closest(".card").children(".bodyCartaContainer").children(".card-body").text();
         mozoEstadoElegido(this);
         leerEstadoMesa(descriptivo);
-    });
-
-    $("a").click(function () {
-        var tipoVentana = $("#modoVentana").val();
-        if (tipoVentana == "ventaNueva") {
-            return false;
-        };
     });
 
     $("#img-agregar").click(function () {
@@ -25,23 +28,31 @@
         $("#avisoDeVacio").css("display", "none");
         $("#tablaVenta").css("display", "none");
         $("#cboMozos").val("");
+        $("#cboTiposDeProducto").val("");
+        $("#cboProductos").val("");
+        $("#cantPedido").val("");
+        $("#comPedido").val("");
+        $("#modoVentana").val("seleccionarMesa");
     });
 
 });
 
 function leerEstadoMesa(descriptivo) {
+    var tipoVentana = $("#modoVentana").val();
     if (descriptivo.trim() == "") {
         $("#avisoSeleccioneMesa").css("display", "none");
         $("#avisoDeVacio").css("display", "block");
         $("#tablaVenta").css("display", "none");
-        $("#cboContainer").css("display", "block");
+        $("#cboContainer").show();
         $("#modoVentana").val("ventaVacia");
     } else {
-        $("#avisoSeleccioneMesa").css("display", "none");
-        $("#avisoDeVacio").css("display", "none");
-        $("#tablaVenta").css("display", "block");
-        $("#cboContainer").css("display", "none");
-        $("#modoVentana").val("ventaSeleccionada");
+        if(tipoVentana != "ventaNueva"){
+            $("#avisoSeleccioneMesa").css("display", "none");
+            $("#avisoDeVacio").css("display", "none");
+            $("#tablaVenta").css("display", "block");
+            $("#cboContainer").hide();
+            $("#modoVentana").val("ventaSeleccionada");
+        }
     }
 };
 
@@ -54,7 +65,3 @@ function mozoEstadoElegido(linkSeleccionado) {
         };
     };
 };
-
-function ocultarCollapse(linkSeleccionado) {
-    $(linkSeleccionado).closest(".card").children(".bodyCartaContainer").collapse("hide");
-}

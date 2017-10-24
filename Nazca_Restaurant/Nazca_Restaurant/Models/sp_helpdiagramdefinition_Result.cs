@@ -11,16 +11,9 @@ namespace Nazca_Restaurant.Models
 {
     using System;
     
-    public partial class sp_lisarDetalleVenta_Result
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int intNroVen { get; set; }
-        public string chrCodPro { get; set; }
-        public string chrDesPro { get; set; }
-        public string chrComPro { get; set; }
-        public short intCanPro { get; set; }
-        public decimal numPreVen { get; set; }
-        public string chrHorCoc { get; set; }
-        public Nullable<short> bytOrden { get; set; }
-        public byte bytAteCoc { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

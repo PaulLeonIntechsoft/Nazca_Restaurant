@@ -29,16 +29,16 @@ function ajaxListadoMesas() {
                 $("#texto" + indice).html(v);
                 if (v1.chrCodEstado == "A") {
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-success");
+                    $("#" + v1.chrCodMesa).addClass("bg-warning");
                 } else if (v1.chrCodEstado == "B") {
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-warning");
+                    $("#" + v1.chrCodMesa).addClass("bg-success");
                 } else if (v1.chrCodEstado == "C") {
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-primary");
+                    $("#" + v1.chrCodMesa).addClass("bg-secondary");
                 } else {
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-primary");
+                    $("#" + v1.chrCodMesa).addClass("bg-secondary");
                 }
             });
         },

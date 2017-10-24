@@ -41,6 +41,27 @@ namespace Nazca_Restaurant.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregarTipoDeCambio", fechaParameter, valorCambioParameter);
         }
     
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
         public virtual int sp_aperturarCaja(string fecha, Nullable<decimal> soles, Nullable<decimal> dolares, string usuario)
         {
             var fechaParameter = fecha != null ?
@@ -62,6 +83,27 @@ namespace Nazca_Restaurant.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_aperturarCaja", fechaParameter, solesParameter, dolaresParameter, usuarioParameter);
         }
     
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
         public virtual ObjectResult<sp_datosMozo_Result> sp_datosMozo(string codigoMozo)
         {
             var codigoMozoParameter = codigoMozo != null ?
@@ -69,6 +111,116 @@ namespace Nazca_Restaurant.Models
                 new ObjectParameter("codigoMozo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_datosMozo_Result>("sp_datosMozo", codigoMozoParameter);
+        }
+    
+        public virtual ObjectResult<sp_datosProducto_Result> sp_datosProducto(string codigoProducto)
+        {
+            var codigoProductoParameter = codigoProducto != null ?
+                new ObjectParameter("codigoProducto", codigoProducto) :
+                new ObjectParameter("codigoProducto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_datosProducto_Result>("sp_datosProducto", codigoProductoParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_insertarDetalleVenta(Nullable<int> numeroVenta, string codigoProducto, string comentarioProducto, Nullable<short> cantidadProductos, Nullable<short> ordenEnVenta)
+        {
+            var numeroVentaParameter = numeroVenta.HasValue ?
+                new ObjectParameter("numeroVenta", numeroVenta) :
+                new ObjectParameter("numeroVenta", typeof(int));
+    
+            var codigoProductoParameter = codigoProducto != null ?
+                new ObjectParameter("codigoProducto", codigoProducto) :
+                new ObjectParameter("codigoProducto", typeof(string));
+    
+            var comentarioProductoParameter = comentarioProducto != null ?
+                new ObjectParameter("comentarioProducto", comentarioProducto) :
+                new ObjectParameter("comentarioProducto", typeof(string));
+    
+            var cantidadProductosParameter = cantidadProductos.HasValue ?
+                new ObjectParameter("cantidadProductos", cantidadProductos) :
+                new ObjectParameter("cantidadProductos", typeof(short));
+    
+            var ordenEnVentaParameter = ordenEnVenta.HasValue ?
+                new ObjectParameter("ordenEnVenta", ordenEnVenta) :
+                new ObjectParameter("ordenEnVenta", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertarDetalleVenta", numeroVentaParameter, codigoProductoParameter, comentarioProductoParameter, cantidadProductosParameter, ordenEnVentaParameter);
+        }
+    
+        public virtual int sp_insertarVenta(string codigoMesa, string codigoMozo, string pagoTarjeta, string recibePropina, Nullable<decimal> montoPropina, Nullable<decimal> montoTotal, string formaPago, string codigoUsuario)
+        {
+            var codigoMesaParameter = codigoMesa != null ?
+                new ObjectParameter("codigoMesa", codigoMesa) :
+                new ObjectParameter("codigoMesa", typeof(string));
+    
+            var codigoMozoParameter = codigoMozo != null ?
+                new ObjectParameter("codigoMozo", codigoMozo) :
+                new ObjectParameter("codigoMozo", typeof(string));
+    
+            var pagoTarjetaParameter = pagoTarjeta != null ?
+                new ObjectParameter("pagoTarjeta", pagoTarjeta) :
+                new ObjectParameter("pagoTarjeta", typeof(string));
+    
+            var recibePropinaParameter = recibePropina != null ?
+                new ObjectParameter("recibePropina", recibePropina) :
+                new ObjectParameter("recibePropina", typeof(string));
+    
+            var montoPropinaParameter = montoPropina.HasValue ?
+                new ObjectParameter("montoPropina", montoPropina) :
+                new ObjectParameter("montoPropina", typeof(decimal));
+    
+            var montoTotalParameter = montoTotal.HasValue ?
+                new ObjectParameter("montoTotal", montoTotal) :
+                new ObjectParameter("montoTotal", typeof(decimal));
+    
+            var formaPagoParameter = formaPago != null ?
+                new ObjectParameter("formaPago", formaPago) :
+                new ObjectParameter("formaPago", typeof(string));
+    
+            var codigoUsuarioParameter = codigoUsuario != null ?
+                new ObjectParameter("codigoUsuario", codigoUsuario) :
+                new ObjectParameter("codigoUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insertarVenta", codigoMesaParameter, codigoMozoParameter, pagoTarjetaParameter, recibePropinaParameter, montoPropinaParameter, montoTotalParameter, formaPagoParameter, codigoUsuarioParameter);
         }
     
         public virtual ObjectResult<sp_lisarDetalleVenta_Result> sp_lisarDetalleVenta(Nullable<int> codigoVenta)
@@ -123,6 +275,19 @@ namespace Nazca_Restaurant.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarTiposDeProductos_Result>("sp_listarTiposDeProductos");
         }
     
+        public virtual ObjectResult<sp_login_Result> sp_login(string usuario, string contrasena)
+        {
+            var usuarioParameter = usuario != null ?
+                new ObjectParameter("usuario", usuario) :
+                new ObjectParameter("usuario", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_login_Result>("sp_login", usuarioParameter, contrasenaParameter);
+        }
+    
         public virtual ObjectResult<sp_productosPorTipo_Result> sp_productosPorTipo(string codigoTipo)
         {
             var codigoTipoParameter = codigoTipo != null ?
@@ -130,6 +295,28 @@ namespace Nazca_Restaurant.Models
                 new ObjectParameter("codigoTipo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_productosPorTipo_Result>("sp_productosPorTipo", codigoTipoParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     }
 }

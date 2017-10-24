@@ -16,10 +16,10 @@ namespace Nazca_Restaurant.Controllers
 
         public ActionResult Index()
         {
-
             List<sp_listarMesas_Result> listaMesasBase = new List<Models.sp_listarMesas_Result>();
             listaMesasBase = this._databaseManager.sp_listarMesas().ToList();
             listarEmpleados();
+            listarTiposDeProductos();
 
             return View(listaMesasBase);
         }
@@ -156,6 +156,116 @@ namespace Nazca_Restaurant.Controllers
 
         }
 
+        public void listarTiposDeProductos()
+        {
 
+            List<sp_listarTiposDeProductos_Result> listaBase = new List<sp_listarTiposDeProductos_Result>();
+            listaBase = this._databaseManager.sp_listarTiposDeProductos().ToList();
+
+            List<SelectListItem> listaSalida = new List<SelectListItem>();
+            foreach (var item in listaBase)
+            {
+                listaSalida.Add(new SelectListItem { Text = item.chrDesTipo, Value = item.chrCodTipo.Trim()});
+            }
+
+            ViewBag.TiposDeProductos = listaSalida;
+
+        }
+
+        public JsonResult ArmarMenu(string chrCodPro, string chrComPro, string intCanPro)
+        {
+            try
+            {
+                List<sp_lisarDetalleVenta_Result> listaSalida = new List<sp_lisarDetalleVenta_Result>();
+                DatosMenu pedido = new DatosMenu();
+                pedido.chrCodPro = chrCodPro;
+                pedido.chrComPro = chrComPro;
+                pedido.intCanPro = Convert.ToInt32(intCanPro);
+
+                List<DatosMenu> listaBase = new List<DatosMenu>();
+
+                if (Session["arrayDatosMenu"] != null)
+                {
+                    listaBase = (List<DatosMenu>)Session["arrayDatosMenu"];
+                }
+
+                listaBase.Add(pedido);
+
+                Session["arrayDatosMenu"] = listaBase;
+
+                foreach (var item in listaBase)
+                {
+                    sp_datosProducto_Result productoUnico = new sp_datosProducto_Result();
+                    productoUnico = this._databaseManager.sp_datosProducto(item.chrCodPro).ToList().First();
+
+                    sp_lisarDetalleVenta_Result detalleUnico = new sp_lisarDetalleVenta_Result();
+                    detalleUnico.chrCodPro = item.chrCodPro;
+                    detalleUnico.chrDesPro = productoUnico.chrDesPro;
+                    detalleUnico.chrComPro = item.chrComPro;
+                    detalleUnico.intCanPro = Convert.ToInt16(item.intCanPro);
+                    detalleUnico.numPreVen = productoUnico.numPrecio;
+                    listaSalida.Add(detalleUnico);
+                }
+
+                return Json(listaSalida, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+                throw;
+            }
+        }
+
+        public JsonResult Productos_Bind(String idTipo)
+        {
+            List<sp_productosPorTipo_Result> listaBase = new List<sp_productosPorTipo_Result>();
+            listaBase = this._databaseManager.sp_productosPorTipo(idTipo).ToList();
+            return Json(listaBase, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Guardar_Cambios(string codMesa, string codMozo, string codTarjeta, string codProp, string montoPropina, string tipoPago, string montoTotal)
+        {
+            try
+            {
+                int n = this._databaseManager.sp_insertarVenta(codMesa, codMozo, codTarjeta, codProp, Convert.ToDecimal(montoPropina), Convert.ToDecimal(montoTotal), tipoPago, "MOZOS");
+                List<sp_listarEstadoMesa_Result> listaEstadoMesas = new List<sp_listarEstadoMesa_Result>();
+                listaEstadoMesas = this._databaseManager.sp_listarEstadoMesa(codMesa).ToList();
+                int nroV = 0;
+                int contador = 1;
+                if (listaEstadoMesas.Count != 0)
+                {
+                    sp_listarEstadoMesa_Result estadoUnico = listaEstadoMesas.First();
+                    nroV = estadoUnico.intNroVen;
+                }
+
+
+                List<DatosMenu> listaBase = new List<DatosMenu>();
+
+                if (Session["arrayDatosMenu"] != null)
+                {
+                    listaBase = (List<DatosMenu>)Session["arrayDatosMenu"];
+                }
+
+
+                foreach (var item in listaBase)
+                {
+                    sp_datosProducto_Result productoUnico = new sp_datosProducto_Result();
+                    productoUnico = this._databaseManager.sp_datosProducto(item.chrCodPro).ToList().First();
+
+                    int n2 = this._databaseManager.sp_insertarDetalleVenta(nroV, productoUnico.chrCodPro, item.chrComPro, Convert.ToInt16(item.intCanPro), Convert.ToInt16(contador));
+
+                    contador++;
+                }
+
+                return Json(new { success = true, responseText = "Your message successfuly sent!" }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+                throw;
+            }
+        }
     }
 }

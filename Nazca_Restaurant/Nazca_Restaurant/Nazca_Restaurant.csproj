@@ -195,22 +195,19 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AtencionController.cs" />
     <Compile Include="Controllers\CajaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Internal\DatosMenu.cs" />
     <Compile Include="Models\Internal\Menu.cs" />
     <Compile Include="Models\Internal\Mesas.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NazResModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,6 +224,15 @@
       <DependentUpon>NazResModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_datosMozo_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_datosProducto_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_lisarDetalleVenta_Result.cs">
@@ -251,6 +257,9 @@
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_listarTiposDeProductos_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_login_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_productosPorTipo_Result.cs">
@@ -305,6 +314,8 @@
       <DependentUpon>NazResModel.edmx</DependentUpon>
       <LastGenOutput>NazResModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\Individual\controlMontos.js" />
+    <Content Include="Scripts\Individual\controlPedidos.js" />
     <Content Include="Scripts\Individual\datosDeBase.js" />
     <Content Include="Scripts\Individual\datosTablas.js" />
     <Content Include="Scripts\Individual\listadoMesas.js" />
