@@ -4,24 +4,62 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Nazca_Restaurant.Models;
-using Nazca_Restaurant.Models.Internal;
-using Nazca_Restaurant.Controllers.Internal;
+using Nazca_Restaurant.Models.Internal.Entidades;
+using Nazca_Restaurant.Models.Internal.Modelos;
 
 namespace Nazca_Restaurant.Controllers
 {
     public class AtencionController : Controller
     {
 
-        NazResEntities2 _databaseManager = new NazResEntities2();
+        private NazResEntities2 databaseManager = new NazResEntities2();
+        private VentasModel ventasModel = new VentasModel();
+        private PedidosModel pedidosModel = new PedidosModel();
 
         public ActionResult Index()
         {
             List<sp_listarMesas_Result> listaMesasBase = new List<Models.sp_listarMesas_Result>();
-            listaMesasBase = this._databaseManager.sp_listarMesas().ToList();
+            listaMesasBase = this.databaseManager.sp_listarMesas().ToList();
             listarEmpleados();
             listarTiposDeProductos();
 
             return View(listaMesasBase);
+        }
+
+        public void listarEmpleados()
+        {
+            List<sp_listarMozos_Result> listaBase = new List<sp_listarMozos_Result>();
+            listaBase = this.databaseManager.sp_listarMozos().ToList();
+
+            List<SelectListItem> listaSalida = new List<SelectListItem>();
+
+            foreach (var item in listaBase)
+            {
+                listaSalida.Add(new SelectListItem
+                {
+                    Text = item.chrApeMoz + " " + item.chrNomMoz,
+                    Value = item.chrCodMoz.Trim()
+                });
+            }
+
+            ViewBag.Mozos = listaSalida;
+
+        }
+
+        public void listarTiposDeProductos()
+        {
+
+            List<sp_listarTiposDeProductos_Result> listaBase = new List<sp_listarTiposDeProductos_Result>();
+            listaBase = this.databaseManager.sp_listarTiposDeProductos().ToList();
+
+            List<SelectListItem> listaSalida = new List<SelectListItem>();
+            foreach (var item in listaBase)
+            {
+                listaSalida.Add(new SelectListItem { Text = item.chrDesTipo, Value = item.chrCodTipo.Trim() });
+            }
+
+            ViewBag.TiposDeProductos = listaSalida;
+
         }
 
         public JsonResult MesasBind()
@@ -31,7 +69,7 @@ namespace Nazca_Restaurant.Controllers
                 List<Mesas> listaCompletaMesas = new List<Mesas>();
 
                 List<sp_listarMesas_Result> listaMesasBase = new List<Models.sp_listarMesas_Result>();
-                listaMesasBase = this._databaseManager.sp_listarMesas().ToList();
+                listaMesasBase = this.databaseManager.sp_listarMesas().ToList();
 
                 foreach (var mesaUnica in listaMesasBase)
                 {
@@ -39,7 +77,7 @@ namespace Nazca_Restaurant.Controllers
                     nuevaMesa.chrCodMesa = mesaUnica.chrCodMesa;
                     nuevaMesa.chrDesMesa = mesaUnica.chrDesMesa;
                     List<sp_listarEstadoMesa_Result> listaEstadoMesas = new List<sp_listarEstadoMesa_Result>();
-                    listaEstadoMesas = this._databaseManager.sp_listarEstadoMesa(mesaUnica.chrCodMesa).ToList();
+                    listaEstadoMesas = this.databaseManager.sp_listarEstadoMesa(mesaUnica.chrCodMesa).ToList();
                     if (listaEstadoMesas.Count != 0)
                     {
                         sp_listarEstadoMesa_Result estadoUnico = listaEstadoMesas.First();
@@ -59,7 +97,7 @@ namespace Nazca_Restaurant.Controllers
                 foreach (var mesaIncompleta in listaCompletaMesas)
                 {
                     List<sp_datosMozo_Result> listaMozos = new List<Models.sp_datosMozo_Result>();
-                    listaMozos = this._databaseManager.sp_datosMozo(mesaIncompleta.chrCodMoz).ToList();
+                    listaMozos = this.databaseManager.sp_datosMozo(mesaIncompleta.chrCodMoz).ToList();
 
                     if (listaMozos.Count != 0)
                     {
@@ -85,179 +123,172 @@ namespace Nazca_Restaurant.Controllers
             }
         }
 
-        public JsonResult MenuBind(String idMesa)
+        public JsonResult ProductosBind(string idTipo)
         {
+            List<sp_productosPorTipo_Result> listaBase = new List<sp_productosPorTipo_Result>();
+            listaBase = this.databaseManager.sp_productosPorTipo(idTipo).ToList();
+            return Json(listaBase, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult MenuBind(string idMesa)
+        {
+            Menu menuCompleto = null;
+
+            Pedido pedido = null;
+            List<Pedido> arrPedidos = null;
+
+            List<sp_lisarDetalleVenta_Result> detalleVenta = null;
+            sp_listarDatosVentas_Result datosVenta = null;
+
+            int numVenta = 0;
+
             try
             {
-                Menu menuCompleto = new Menu();
-                int nroV = 0;
-                List<sp_lisarDetalleVenta_Result> listaBase = new List<sp_lisarDetalleVenta_Result>();
-                List<sp_listarEstadoMesa_Result> listaEstadoMesas = new List<sp_listarEstadoMesa_Result>();
-                listaEstadoMesas = this._databaseManager.sp_listarEstadoMesa(idMesa).ToList();
+                #region Instancias
+                menuCompleto = new Menu();
+                arrPedidos = new List<Pedido>();
+                detalleVenta = new List<sp_lisarDetalleVenta_Result>();
+                datosVenta = new sp_listarDatosVentas_Result();
+                #endregion
 
-                if (listaEstadoMesas.Count > 0)
-                {
-                    sp_listarEstadoMesa_Result estadoUnico = listaEstadoMesas.First();
-                    nroV = Convert.ToInt32(estadoUnico.intNroVen);
-                    listaBase = this._databaseManager.sp_lisarDetalleVenta(nroV).ToList();
-                } else
-                {
-                    listaBase = null;
-                }
+                numVenta = ventasModel.Get_NumeroVenta(idMesa);
 
-                List<sp_listarDatosVentas_Result> listaDatoBase = new List<sp_listarDatosVentas_Result>();
-                listaDatoBase = this._databaseManager.sp_listarDatosVentas(nroV).ToList();
-
-                if (listaDatoBase.Count > 0)
+                if (numVenta > 0)
                 {
-                    sp_listarDatosVentas_Result datosVentaSolo = listaDatoBase.First();
-                    menuCompleto.datosVenta = datosVentaSolo;
-                }
-                else
-                {
-                    menuCompleto.datosVenta = null;
+                    detalleVenta = this.databaseManager.sp_lisarDetalleVenta(numVenta).ToList();
+                    datosVenta = this.databaseManager.sp_listarDatosVentas(numVenta).ToList().First();
                 }
 
-                if (listaBase != null)
+                foreach (var item in detalleVenta)
                 {
-                    menuCompleto.detallesVenta = listaBase;
+                    pedido = new Pedido();
+                    pedido.chrCodPro = item.chrCodPro;
+                    pedido.chrDesPro = item.chrDesPro;
+                    pedido.chrComPro = item.chrComPro;
+                    pedido.numPreVen = Convert.ToDouble(item.numPreVen);
+                    pedido.intCanPro = item.intCanPro;
+                    pedido.bytAteCoc = item.bytAteCoc;
+                    pedido.tipoControl = 1;
+                    pedido.paraEliminar = 0;
+                    arrPedidos.Add(pedido);
                 }
-                else
-                {
-                    menuCompleto.detallesVenta = null;
-                }
-                
+
+                Session["arrayPedidos"] = arrPedidos;
+
+                menuCompleto.datosVenta = datosVenta;
+                menuCompleto.detallesVenta = arrPedidos;
+
                 return Json(menuCompleto, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return Json(null, JsonRequestBehavior.AllowGet);
+                return Json(menuCompleto, JsonRequestBehavior.AllowGet);
                 throw;
             }
-
         }
 
-        public void listarEmpleados()
+        public JsonResult AgregarPedido(string chrCodPro, string chrComPro, string intCanPro)
         {
-            List<sp_listarMozos_Result> listaBase = new List<sp_listarMozos_Result>();
-            listaBase = this._databaseManager.sp_listarMozos().ToList();
-
-            List<SelectListItem> listaSalida = new List<SelectListItem>();
-
-            foreach (var item in listaBase)
-            {
-                listaSalida.Add(new SelectListItem {
-                                        Text = item.chrApeMoz + " " + item.chrNomMoz,
-                                        Value = item.chrCodMoz.Trim()
-                                });
-            }
-
-            ViewBag.Mozos = listaSalida;
-
-        }
-
-        public void listarTiposDeProductos()
-        {
-
-            List<sp_listarTiposDeProductos_Result> listaBase = new List<sp_listarTiposDeProductos_Result>();
-            listaBase = this._databaseManager.sp_listarTiposDeProductos().ToList();
-
-            List<SelectListItem> listaSalida = new List<SelectListItem>();
-            foreach (var item in listaBase)
-            {
-                listaSalida.Add(new SelectListItem { Text = item.chrDesTipo, Value = item.chrCodTipo.Trim()});
-            }
-
-            ViewBag.TiposDeProductos = listaSalida;
-
-        }
-
-        public JsonResult ArmarMenu(string chrCodPro, string chrComPro, string intCanPro)
-        {
+            Pedido pedido = null;
+            List<Pedido> arrPedidos = null;
             try
             {
-                List<sp_lisarDetalleVenta_Result> listaSalida = new List<sp_lisarDetalleVenta_Result>();
-                DatosMenu pedido = new DatosMenu();
+                #region Instancias
+                pedido = new Pedido();
+                arrPedidos = new List<Pedido>();
+                #endregion
+
+                #region Pedido
                 pedido.chrCodPro = chrCodPro;
+                pedido.chrDesPro = pedidosModel.Descripcion_Producto(chrCodPro);
                 pedido.chrComPro = chrComPro;
+                pedido.numPreVen = pedidosModel.Precio_Producto(chrCodPro);
                 pedido.intCanPro = Convert.ToInt32(intCanPro);
+                pedido.bytAteCoc = 0;
+                pedido.tipoControl = 2;
+                pedido.paraEliminar = 0;
+                #endregion
 
-                List<DatosMenu> listaBase = new List<DatosMenu>();
-
-                if (Session["arrayDatosMenu"] != null)
+                if (Session["arrayPedidos"] != null)
                 {
-                    listaBase = (List<DatosMenu>)Session["arrayDatosMenu"];
+                    arrPedidos = (List<Pedido>)Session["arrayPedidos"];
                 }
 
-                listaBase.Add(pedido);
+                arrPedidos = pedidosModel.Agregar_Pedido(arrPedidos, pedido);
 
-                Session["arrayDatosMenu"] = listaBase;
+                Session["arrayPedidos"] = arrPedidos;
 
-                foreach (var item in listaBase)
-                {
-                    sp_datosProducto_Result productoUnico = new sp_datosProducto_Result();
-                    productoUnico = this._databaseManager.sp_datosProducto(item.chrCodPro).ToList().First();
-
-                    sp_lisarDetalleVenta_Result detalleUnico = new sp_lisarDetalleVenta_Result();
-                    detalleUnico.chrCodPro = item.chrCodPro;
-                    detalleUnico.chrDesPro = productoUnico.chrDesPro;
-                    detalleUnico.chrComPro = item.chrComPro;
-                    detalleUnico.intCanPro = Convert.ToInt16(item.intCanPro);
-                    detalleUnico.numPreVen = productoUnico.numPrecio;
-                    listaSalida.Add(detalleUnico);
-                }
-
-                return Json(listaSalida, JsonRequestBehavior.AllowGet);
+                return Json(arrPedidos, JsonRequestBehavior.AllowGet);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return Json(null, JsonRequestBehavior.AllowGet);
-                throw;
+                return Json(arrPedidos, JsonRequestBehavior.AllowGet);
+                throw ex;
             }
         }
 
-        public JsonResult Productos_Bind(String idTipo)
+        public JsonResult EliminarPedido(string codProd, string tipoControl)
         {
-            List<sp_productosPorTipo_Result> listaBase = new List<sp_productosPorTipo_Result>();
-            listaBase = this._databaseManager.sp_productosPorTipo(idTipo).ToList();
-            return Json(listaBase, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult Guardar_Cambios(string codMesa, string codMozo, string codTarjeta, string codProp, string montoPropina, string tipoPago, string montoTotal)
-        {
+            Pedido pedido = null;
+            List<Pedido> arrPedido = null;
             try
             {
-                int n = this._databaseManager.sp_insertarVenta(codMesa, codMozo, codTarjeta, codProp, Convert.ToDecimal(montoPropina), Convert.ToDecimal(montoTotal), tipoPago, "MOZOS");
-                List<sp_listarEstadoMesa_Result> listaEstadoMesas = new List<sp_listarEstadoMesa_Result>();
-                listaEstadoMesas = this._databaseManager.sp_listarEstadoMesa(codMesa).ToList();
-                int nroV = 0;
-                int contador = 1;
-                if (listaEstadoMesas.Count != 0)
+                arrPedido = new List<Pedido>();
+                pedido = new Pedido();
+
+                pedido.chrCodPro = codProd;
+                pedido.tipoControl = Convert.ToInt32(tipoControl);
+
+                arrPedido = pedidosModel.Eliminar_Pedido((List<Pedido>)Session["arrayPedidos"], pedido);
+
+                return Json(arrPedido, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(arrPedido, JsonRequestBehavior.AllowGet);
+                throw ex;
+            }
+
+        }
+
+        public JsonResult GuardarVenta(string codMesa, string codMozo, string codTarjeta, string tipoPago, string montoTotal)
+        {
+            List<Pedido> arrPedidos = null;
+            Ventas datosVenta = null;
+            int n1 = 0;
+            int n2 = 0;
+            try
+            {
+
+                #region Instanciacion
+                datosVenta = new Ventas();
+                arrPedidos = new List<Pedido>();
+                #endregion
+
+                #region DatosVenta
+                datosVenta.chrCodMesa = codMesa;
+                datosVenta.chrCodMozo = codMozo;
+                datosVenta.bytPagTar = codTarjeta;
+                datosVenta.bytPropina = "0";
+                datosVenta.numPropina = Convert.ToDouble("0.00");
+                datosVenta.numSTotal = Convert.ToDouble(montoTotal);
+                datosVenta.chrForPag = tipoPago;
+                datosVenta.chrCodUsr = "MOZOS";
+                #endregion
+
+                n1 = ventasModel.RegistrarVenta(datosVenta);
+
+                int numVenta = 0;
+                numVenta = ventasModel.Get_NumeroVenta(codMesa);
+                
+                if (Session["arrayPedidos"] != null)
                 {
-                    sp_listarEstadoMesa_Result estadoUnico = listaEstadoMesas.First();
-                    nroV = estadoUnico.intNroVen;
+                    arrPedidos = (List<Pedido>)Session["arrayPedidos"];
                 }
 
-
-                List<DatosMenu> listaBase = new List<DatosMenu>();
-
-                if (Session["arrayDatosMenu"] != null)
-                {
-                    listaBase = (List<DatosMenu>)Session["arrayDatosMenu"];
-                }
-
-
-                foreach (var item in listaBase)
-                {
-                    sp_datosProducto_Result productoUnico = new sp_datosProducto_Result();
-                    productoUnico = this._databaseManager.sp_datosProducto(item.chrCodPro).ToList().First();
-
-                    int n2 = this._databaseManager.sp_insertarDetalleVenta(nroV, productoUnico.chrCodPro, item.chrComPro, Convert.ToInt16(item.intCanPro), Convert.ToInt16(contador));
-
-                    contador++;
-                }
-
+                n2 = ventasModel.PreRegistroDetalleVenta(numVenta, 1, arrPedidos);
+                
                 return Json(new { success = true, responseText = "Your message successfuly sent!" }, JsonRequestBehavior.AllowGet);
 
             }
@@ -267,5 +298,72 @@ namespace Nazca_Restaurant.Controllers
                 throw;
             }
         }
+
+        public JsonResult EditarVenta(string codMesa, string codTarjeta, string tipoPago, string montoTotal)
+        {
+
+            List<Pedido> arrPedidos = null;
+            Ventas datosVenta = null;
+            int n1 = 0;
+            int n2 = 0;
+
+            try
+            {
+                #region Instanciacion
+                datosVenta = new Ventas();
+                arrPedidos = new List<Pedido>();
+                #endregion
+
+                #region DatosVenta
+                datosVenta.chrCodMesa = codMesa;
+                datosVenta.bytPagTar = codTarjeta;
+                datosVenta.numSTotal = Convert.ToDouble(montoTotal);
+                datosVenta.chrForPag = tipoPago;
+                #endregion
+
+                int numVenta = 0;
+                numVenta = ventasModel.Get_NumeroVenta(codMesa);
+
+                n1 = ventasModel.EditarVenta(numVenta, datosVenta);
+
+                if (Session["arrayPedidos"] != null)
+                {
+                    arrPedidos = (List<Pedido>)Session["arrayPedidos"];
+                }
+
+                n2 = ventasModel.PreRegistroDetalleVenta(numVenta, 2, arrPedidos);
+                
+                return Json(new { success = true, responseText = "Your message successfuly sent!" }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+                throw ex;
+            }
+        }
+
+        public JsonResult FinalizarVenta(string codMesa)
+        {
+
+            try
+            {
+                int numVenta = ventasModel.Get_NumeroVenta(codMesa);
+                int n = databaseManager.sp_finalizarVenta(numVenta);
+                return Json(new { success = true, responseText = "Your message successfuly sent!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+                throw ex;
+            }
+        }
+
+        public JsonResult Vaciar_Array_Session()
+        {
+            Session["arrayPedidos"] = null;
+            return Json(new { success = true, responseText = "Your message successfuly sent!" }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

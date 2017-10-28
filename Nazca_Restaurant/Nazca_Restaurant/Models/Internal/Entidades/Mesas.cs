@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Nazca_Restaurant.Controllers.Internal
+namespace Nazca_Restaurant.Models.Internal.Entidades
 {
     public class Mesas
     {
-    
+
         public string chrCodMesa { get; set; }
         public string chrDesMesa { get; set; }
         public string chrCodEstado { get; set; }
@@ -15,5 +15,6 @@ namespace Nazca_Restaurant.Controllers.Internal
         public string chrNomMoz { get; set; }
         public string chrApeMoz { get; set; }
         public string chrHorVen { get; set; }
+
     }
 }

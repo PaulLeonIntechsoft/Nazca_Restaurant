@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace Nazca_Restaurant.Controllers
 {
+    [Authorize]
     public class CajaController : Controller
     {
 

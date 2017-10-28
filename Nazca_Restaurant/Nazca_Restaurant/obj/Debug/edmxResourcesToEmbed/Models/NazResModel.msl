@@ -31,7 +31,22 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_detallesPlato" FunctionName="NazResModel.Store.sp_detallesPlato">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_detallesPlato_Result">
+          <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+          <ScalarProperty Name="chrDesPro" ColumnName="chrDesPro" />
+          <ScalarProperty Name="chrComentario" ColumnName="chrComentario" />
+          <ScalarProperty Name="imgProducto" ColumnName="imgProducto" />
+          <ScalarProperty Name="cantVendido" ColumnName="cantVendido" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="NazResModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_editarDetalleVenta" FunctionName="NazResModel.Store.sp_editarDetalleVenta" />
+    <FunctionImportMapping FunctionImportName="sp_editarVentas" FunctionName="NazResModel.Store.sp_editarVentas" />
+    <FunctionImportMapping FunctionImportName="sp_eliminarPedido" FunctionName="NazResModel.Store.sp_eliminarPedido" />
+    <FunctionImportMapping FunctionImportName="sp_finalizarVenta" FunctionName="NazResModel.Store.sp_finalizarVenta" />
     <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="NazResModel.Store.sp_helpdiagramdefinition">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NazResModel.sp_helpdiagramdefinition_Result">
@@ -141,6 +156,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_listarVerMenu" FunctionName="NazResModel.Store.sp_listarVerMenu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_listarVerMenu_Result">
+          <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+          <ScalarProperty Name="chrDesTipo" ColumnName="chrDesTipo" />
+          <ScalarProperty Name="chrDesPro" ColumnName="chrDesPro" />
+          <ScalarProperty Name="numPrecio" ColumnName="numPrecio" />
+          <ScalarProperty Name="cantStock" ColumnName="cantStock" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_login" FunctionName="NazResModel.Store.sp_login">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NazResModel.sp_login_Result">
@@ -166,6 +192,20 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NazResModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_ultimoIndice" FunctionName="NazResModel.Store.sp_ultimoIndice">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NazResModel.sp_ultimoIndice_Result">
+          <ScalarProperty Name="intNroVen" ColumnName="intNroVen" />
+          <ScalarProperty Name="chrCodPro" ColumnName="chrCodPro" />
+          <ScalarProperty Name="chrComPro" ColumnName="chrComPro" />
+          <ScalarProperty Name="intCanPro" ColumnName="intCanPro" />
+          <ScalarProperty Name="numPreVen" ColumnName="numPreVen" />
+          <ScalarProperty Name="chrHorCoc" ColumnName="chrHorCoc" />
+          <ScalarProperty Name="bytOrden" ColumnName="bytOrden" />
+          <ScalarProperty Name="bytAteCoc" ColumnName="bytAteCoc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="NazResModel.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>

@@ -7,12 +7,12 @@
     </div>
     <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-8">
         <div>
-            <a href="@Url.Action("Apertura","Caja")" class="btn btn-outline-warning btn-block">Apertura de Caja</a><br />
-            <button class="btn btn-outline-warning btn-block">Atención de Mozos</button><br />
-            <button class="btn btn-outline-warning btn-block">Ver Menú</button><br />
-            <button class="btn btn-outline-warning btn-block">Cocina</button><br />
-            <button class="btn btn-outline-warning btn-block">Atención de Caja</button><br />
-            <button class="btn btn-outline-warning btn-block">Cerrar Sesión</button><br />
+            <a href="@Url.Action("Apertura","Caja")" class="btn btn-outline-warning btn-block" >Apertura de Caja</a><br />
+            <a href="@Url.Action("Index","Atencion")" class="btn btn-outline-warning btn-block">Atención de Mozos</a><br />
+            <a href="@Url.Action("VerMenu","Menu")" class="btn btn-outline-warning btn-block">Ver Menú</a><br />
+            <button class="btn btn-outline-warning btn-block" disabled>Cocina</button><br />
+            <button class="btn btn-outline-warning btn-block" disabled>Atención de Caja</button><br />
+            <a href="@Url.Action("LogOff","Account")" class="btn btn-outline-warning btn-block">Cerrar Sesión</a><br />
         </div>
     </div>
 </div>

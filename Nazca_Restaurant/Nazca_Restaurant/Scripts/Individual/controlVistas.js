@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
 
-    $("a").click(function () {
+    $("a").click(function (e) {
         var tipoVentana = $("#modoVentana").val();
         var mozoElegido = $("#cboMozos").val();
         if (tipoVentana == "ventaNueva") {
             if(mozoElegido != ""){
-                return false;
+                e.preventDefault();
             }
         };
     });
@@ -33,6 +33,7 @@
         $("#cantPedido").val("");
         $("#comPedido").val("");
         $("#modoVentana").val("seleccionarMesa");
+        ajaxLimpiarSession();
     });
 
 });

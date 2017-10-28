@@ -19,7 +19,6 @@
             {
                 @Html.AntiForgeryToken()
                
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <label for="chrCodUsr" class="sr-only">Usuario</label>
                     @Html.EditorFor(model => model.chrCodUsr, new { htmlAttributes = new { @class = "form-control text-center", placeholder = "Usuario" } })
@@ -29,11 +28,11 @@
                     <input id="chrNomUsr" name="chrNomUsr" type="password" class="form-control text-center" placeholder="Contraseña" />
                 </div>
 
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <input type="submit" class="btn btn-outline-warning btn-block" id="btnIngresar" value="Ingresar" />
                 </div>
             }
-            </form>
         </div>
     </div>
 </div>

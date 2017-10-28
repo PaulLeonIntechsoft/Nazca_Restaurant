@@ -28,19 +28,35 @@ function ajaxListadoMesas() {
                 }
                 $("#texto" + indice).html(v);
                 if (v1.chrCodEstado == "A") {
-                    $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-warning");
-                } else if (v1.chrCodEstado == "B") {
+                    $("#" + v1.chrCodMesa).attr('estMesa','A');
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
                     $("#" + v1.chrCodMesa).addClass("bg-success");
-                } else if (v1.chrCodEstado == "C") {
+                } else if (v1.chrCodEstado == "B") {
+                    $("#" + v1.chrCodMesa).attr('estMesa', 'B');
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-secondary");
+                    $("#" + v1.chrCodMesa).addClass("bg-warning");
+                } else if (v1.chrCodEstado == "C") {
+                    $("#" + v1.chrCodMesa).attr('estMesa', 'C');
+                    $("#" + v1.chrCodMesa).removeClass("bg-info");
+                    $("#" + v1.chrCodMesa).addClass("bg-primary");
                 } else {
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
                     $("#" + v1.chrCodMesa).addClass("bg-secondary");
                 }
             });
+        },
+        error: function (xhr, statusText, err) {
+            alert("error" + xhr.status);
+        }
+    });
+}
+
+function ajaxLimpiarSession() {
+    $.ajax({
+        url: 'Vaciar_Array_Session',
+        type: 'POST',
+        success: function (data) {
+
         },
         error: function (xhr, statusText, err) {
             alert("error" + xhr.status);

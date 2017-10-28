@@ -201,13 +201,16 @@
     <Compile Include="Controllers\AtencionController.cs" />
     <Compile Include="Controllers\CajaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\Internal\DatosMenu.cs" />
-    <Compile Include="Models\Internal\Menu.cs" />
-    <Compile Include="Models\Internal\Mesas.cs" />
+    <Compile Include="Models\Internal\Entidades\Pedido.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Internal\Entidades\Menu.cs" />
+    <Compile Include="Models\Internal\Entidades\Mesas.cs" />
+    <Compile Include="Models\Internal\Entidades\Ventas.cs" />
+    <Compile Include="Models\Internal\Modelos\PedidosModel.cs" />
+    <Compile Include="Models\Internal\Modelos\VentasModel.cs" />
     <Compile Include="Models\NazResModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,6 +230,9 @@
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_datosProducto_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_detallesPlato_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -259,10 +265,16 @@
     <Compile Include="Models\sp_listarTiposDeProductos_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_listarVerMenu_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_login_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_productosPorTipo_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_ultimoIndice_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,6 +293,7 @@
     <Content Include="Content\individual\aperturaStyle.css" />
     <Content Include="Content\individual\mainStyle.css" />
     <Content Include="Content\individual\ventasStyle.css" />
+    <Content Include="Content\individual\verMenuStyle.css" />
     <Content Include="Content\reStyleBootstrap.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -316,8 +329,9 @@
     </Content>
     <Content Include="Scripts\Individual\controlMontos.js" />
     <Content Include="Scripts\Individual\controlPedidos.js" />
+    <Content Include="Scripts\Individual\controlVerMenuTabla.js" />
     <Content Include="Scripts\Individual\datosDeBase.js" />
-    <Content Include="Scripts\Individual\datosTablas.js" />
+    <Content Include="Scripts\Individual\controlVistas.js" />
     <Content Include="Scripts\Individual\listadoMesas.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

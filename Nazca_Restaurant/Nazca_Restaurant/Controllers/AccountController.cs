@@ -53,7 +53,7 @@ namespace Nazca_Restaurant.Controllers
                     if (loginInfo != null && loginInfo.Count() > 0)
                     {
                         var logindetails = loginInfo.First();
-                        this.SignInUser(logindetails.chrNomUsr, logindetails.chrCodUsr, false);
+                        this.SignInUser(logindetails.chrNomUsr, logindetails.chrCodUsr, logindetails.chrAcceso, false);
                         return this.RedirectToLocal(returnUrl);
                     }
                     else
@@ -68,8 +68,7 @@ namespace Nazca_Restaurant.Controllers
             }
             return this.View(model);
         }
-
-        [HttpPost]
+        
         public ActionResult LogOff()
         {
             try
@@ -86,13 +85,14 @@ namespace Nazca_Restaurant.Controllers
         }
 
 
-        private void SignInUser(string username, string indicador, bool isPersistent)
+        private void SignInUser(string username, string identificador, string permisos, bool isPersistent)
         {
             var claims = new List<Claim>();
             try
             {
                 claims.Add(new Claim(ClaimTypes.Name, username));
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, indicador));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, identificador));
+                claims.Add(new Claim(ClaimTypes.Surname, permisos));
                 var claimIdenties = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
                 var ctx = Request.GetOwinContext();
                 var authenticationManager = ctx.Authentication;
