@@ -365,7 +365,6 @@
     <Content Include="Views\Shared\_LayoutCaja.cshtml" />
     <Content Include="Views\Caja\Apertura.cshtml" />
     <Content Include="Views\Caja\TipoCambio.cshtml" />
-    <Content Include="Views\Menu\BuscarPlato.cshtml" />
     <Content Include="Views\Menu\VerMenu.cshtml" />
     <Content Include="Views\Atencion\Index.cshtml" />
   </ItemGroup>

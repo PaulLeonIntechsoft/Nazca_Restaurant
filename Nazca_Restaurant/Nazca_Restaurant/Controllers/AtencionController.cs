@@ -9,6 +9,7 @@ using Nazca_Restaurant.Models.Internal.Modelos;
 
 namespace Nazca_Restaurant.Controllers
 {
+    [Authorize]
     public class AtencionController : Controller
     {
 

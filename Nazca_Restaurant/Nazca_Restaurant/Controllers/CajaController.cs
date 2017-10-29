@@ -26,25 +26,36 @@ namespace Nazca_Restaurant.Controllers
         [HttpPost]
         public ActionResult Apertura(string dtmFecAper, string numSoles, string numDolares)
         {
+            List<sp_listarAperturaCaja_Result> listaBase = new List<sp_listarAperturaCaja_Result>();
             try
             {
-                var fechaBase = DateTime.ParseExact(dtmFecAper, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                string fecha = fechaBase.ToString("yyyy-MM-dd");
-                int n = this._databaseManager.sp_aperturarCaja(fecha,Decimal.Parse(numSoles), Decimal.Parse(numDolares),"ADMIN");
-                if (n == 1)
+                if (!dtmFecAper.Equals("") || !numSoles.Equals("") || !numDolares.Equals(""))
                 {
-                    List<sp_listarAperturaCaja_Result> listaBase = new List<sp_listarAperturaCaja_Result>();
-                    listaBase = this._databaseManager.sp_listarAperturaCaja().ToList();
-                    return View(listaBase);
+                    var fechaBase = DateTime.ParseExact(dtmFecAper, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    string fecha = fechaBase.ToString("yyyy-MM-dd");
+                    int n = this._databaseManager.sp_aperturarCaja(fecha,Decimal.Parse(numSoles), Decimal.Parse(numDolares),"ADMIN");
+                    if (n == 1)
+                    {
+                        listaBase = this._databaseManager.sp_listarAperturaCaja().ToList();
+                        return View(listaBase);
+                    }else
+                    {
+                        listaBase = this._databaseManager.sp_listarAperturaCaja().ToList();
+                        return View(listaBase);
+                    }
                 }else
                 {
-                    return View();
+                    ModelState.AddModelError(string.Empty, "No se permiten campos vacíos.");
+                    listaBase = this._databaseManager.sp_listarAperturaCaja().ToList();
+                    return View(listaBase);
                 }
 
             }
             catch (Exception)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Verifique los campos ingresados.");
+                listaBase = this._databaseManager.sp_listarAperturaCaja().ToList();
+                return View(listaBase);
                 throw;
             }
         }
@@ -59,25 +70,38 @@ namespace Nazca_Restaurant.Controllers
         [HttpPost]
         public ActionResult TipoCambio(string dtmTipCam, string numTipCam)
         {
+            List<sp_listarTiposDeCambio_Result> listaBase = new List<Models.sp_listarTiposDeCambio_Result>();
             try
             {
-                var fechaBase = DateTime.ParseExact(dtmTipCam, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                String fecha = fechaBase.ToString("yyyy-MM-dd");
-                int n = this._databaseManager.sp_agregarTipoDeCambio(fecha,Decimal.Parse(numTipCam));
-                if (n == 1)
+                if (!dtmTipCam.Equals("") || !numTipCam.Equals(""))
                 {
-                    List<sp_listarTiposDeCambio_Result> listaBase = new List<Models.sp_listarTiposDeCambio_Result>();
-                    listaBase = this._databaseManager.sp_listarTiposDeCambio().ToList();
-                    return View(listaBase);
+                    var fechaBase = DateTime.ParseExact(dtmTipCam, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    String fecha = fechaBase.ToString("yyyy-MM-dd");
+                    int n = this._databaseManager.sp_agregarTipoDeCambio(fecha,Decimal.Parse(numTipCam));
+                    if (n == 1)
+                    {
+                        listaBase = this._databaseManager.sp_listarTiposDeCambio().ToList();
+                        return View(listaBase);
+                    }
+                    else
+                    {
+                        listaBase = this._databaseManager.sp_listarTiposDeCambio().ToList();
+                        return View(listaBase);
+                    }
                 }
                 else
                 {
-                    return View();
+                    ModelState.AddModelError(string.Empty, "No se permiten campos vacíos.");
+                    listaBase = this._databaseManager.sp_listarTiposDeCambio().ToList();
+                    return View(listaBase);
                 }
+
             }
             catch (Exception)
             {
-                return View();
+                ModelState.AddModelError(string.Empty, "Verifique los campos ingresados.");
+                listaBase = this._databaseManager.sp_listarTiposDeCambio().ToList();
+                return View(listaBase);
                 throw;
             }
         }

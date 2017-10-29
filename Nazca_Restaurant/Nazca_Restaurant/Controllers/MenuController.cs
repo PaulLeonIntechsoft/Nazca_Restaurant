@@ -55,21 +55,5 @@ namespace Nazca_Restaurant.Controllers
                 throw;
             }
         }
-
-        public ActionResult BuscarPlato()
-        {
-
-            List<sp_listarTiposDeProductos_Result> listaBase = new List<sp_listarTiposDeProductos_Result>();
-            listaBase = this._databaseManager.sp_listarTiposDeProductos().ToList();
-
-            return View(listaBase);
-        }
-
-        public JsonResult Productos_Bind(String codTipo)
-        {
-            List<sp_productosPorTipo_Result> listaBase = new List<sp_productosPorTipo_Result>();
-            listaBase = this._databaseManager.sp_productosPorTipo(codTipo).ToList();
-            return Json(listaBase, JsonRequestBehavior.AllowGet);
-        }
     }
 }
