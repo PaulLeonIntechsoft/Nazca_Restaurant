@@ -12,7 +12,7 @@
 
     $(".link-descriptivo").click(function () {
         var descriptivo = $(this).closest(".card").children(".bodyCartaContainer").children(".card-body").text();
-        mozoEstadoElegido(this);
+        mozoEstadoElegido();
         leerEstadoMesa(descriptivo);
     });
 
@@ -30,11 +30,15 @@
         $("#cboMozos").val("");
         $("#cboTiposDeProducto").val("");
         $("#cboProductos").val("");
-        $("#cantPedido").val("");
+        $("#cantPedido").val("1");
         $("#comPedido").val("");
         $("#modoVentana").val("seleccionarMesa");
         ajaxLimpiarSession();
     });
+    $("#cancelar").click(function () {
+        ajaxLimpiarSession();
+    });
+
 
 });
 
@@ -57,7 +61,7 @@ function leerEstadoMesa(descriptivo) {
     }
 };
 
-function mozoEstadoElegido(linkSeleccionado) {
+function mozoEstadoElegido() {
     var mozoElegido = $("#cboMozos").val();
     var tipoVentana = $("#modoVentana").val();
     if (mozoElegido != null && mozoElegido != "") {

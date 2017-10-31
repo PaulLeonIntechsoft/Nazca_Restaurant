@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    cargarDolares();
     $(".link-descriptivo").click(function () {
         var id = $(this).closest(".card").attr("id");
         var codMesa = $(this).closest(".card").attr("estMesa");
@@ -69,9 +70,9 @@ function ajaxLlenarTabla(codigoMesa) {
                         v += '<div class="form-check">';
                         v += '<label class="form-check-label">';
                         if (v1.bytAteCoc == '0') {
-                            v += '<input class="form-check-input" type="checkbox" value=""  disabled/>';
+                            v += '<input name="chkPedidos" class="form-check-input" type="checkbox" value=""  disabled/>';
                         } else if (v1.bytAteCoc == '1') {
-                            v += '<input class="form-check-input" type="checkbox" value="" selected="selected" disabled/>';
+                            v += '<input name="chkPedidos" class="form-check-input" type="checkbox" value="" selected="selected" disabled/>';
                         }
                         v += '<label>';
                         v += '</div>';
@@ -93,3 +94,18 @@ function ajaxLlenarTabla(codigoMesa) {
         }
     });
 };
+
+function cargarDolares() {
+    $.ajax({
+        url: 'CargarDolares',
+        type: 'POST',
+        success: function (data) {
+            if (data != null && data != "") {
+                $("#tipoCambioText").val(data);
+            }
+        },
+        error: function (xhr, statusText, err) {
+            alert("error" + xhr.status);
+        }
+    });
+}

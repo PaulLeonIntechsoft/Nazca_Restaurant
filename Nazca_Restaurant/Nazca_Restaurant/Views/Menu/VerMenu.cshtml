@@ -5,10 +5,16 @@
     Layout = "~/Views/Shared/_LayoutCaja.cshtml";
 }
 
+@section styles{
+    <link href="~/Content/individual/verMenuStyle.css" rel="stylesheet" />    
+}
+
 <div class="row">
     <div class="col-12 col-md-6">
         <div id="img-plato-container">
-            <img style="width: 100%" src="~/images/Nazca Rest.jpg"/>
+            <p id="img-lcontainer" class="text-center">
+                <img id="imagenProducto" src="~/images/imagenVacia.png" />
+            </p>
         </div>
     </div>
     <div class="col-12 col-md-6">
@@ -17,7 +23,7 @@
                 <div style="word-wrap: break-word" class="col-12 col-md-10">
                     <h2 id="nomPlato">NOMBRE PLATO</h2>
                     <div id="descripcionPlato-container">
-                        <p id="descriptivoPlato"></p>
+                        <p class="text-white" id="descriptivoPlato"></p>
                     </div>
                 </div>
                 <div class="col-12 col-md-2">
@@ -46,6 +52,11 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <a href="@Url.Action("Index","Home")" class="btn btn-danger">Regresar</a>
     </div>
 </div>
 

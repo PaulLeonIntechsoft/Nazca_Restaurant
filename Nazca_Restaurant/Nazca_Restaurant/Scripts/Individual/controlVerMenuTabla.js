@@ -40,5 +40,11 @@ function datosPlato(fila) {
         $("#nomPlato").html(data.chrDesPro);
         $("#descriptivoPlato").html(data.chrComentario);
         $("#nroPlatosVendidos").html(data.cantVendido);
+        console.log(typeof(data.imgProducto));
+        if (data.imgProducto != "") {
+            $("#imagenProducto").attr("src", "data:image/;base64," + data.imgProducto);
+        } else {
+            $("#imagenProducto").attr("src", "/images/imagenVacia.png");
+        }
     });
 }

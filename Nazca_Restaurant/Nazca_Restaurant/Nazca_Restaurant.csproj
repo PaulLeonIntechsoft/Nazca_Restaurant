@@ -208,6 +208,7 @@
     </Compile>
     <Compile Include="Models\Internal\Entidades\Menu.cs" />
     <Compile Include="Models\Internal\Entidades\Mesas.cs" />
+    <Compile Include="Models\Internal\Entidades\StockPlato.cs" />
     <Compile Include="Models\Internal\Entidades\Ventas.cs" />
     <Compile Include="Models\Internal\Modelos\PedidosModel.cs" />
     <Compile Include="Models\Internal\Modelos\VentasModel.cs" />
@@ -274,6 +275,9 @@
     <Compile Include="Models\sp_productosPorTipo_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_tipoCambioDia_Result.cs">
+      <DependentUpon>NazResModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_ultimoIndice_Result.cs">
       <DependentUpon>NazResModel.tt</DependentUpon>
     </Compile>
@@ -308,6 +312,7 @@
     <Content Include="Content\bootstrap-4.0.0-beta\dist\css\bootstrap.css.map" />
     <Content Include="Content\bootstrap-4.0.0-beta\dist\css\bootstrap.min.css.map" />
     <Content Include="images\anadirMenu.png" />
+    <Content Include="images\imagenVacia.png" />
     <EntityDeploy Include="Models\NazResModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>NazResModel.Designer.cs</LastGenOutput>
@@ -332,6 +337,7 @@
     <Content Include="Scripts\Individual\controlVerMenuTabla.js" />
     <Content Include="Scripts\Individual\datosDeBase.js" />
     <Content Include="Scripts\Individual\controlVistas.js" />
+    <Content Include="Scripts\Individual\fechaRepetida.js" />
     <Content Include="Scripts\Individual\listadoMesas.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

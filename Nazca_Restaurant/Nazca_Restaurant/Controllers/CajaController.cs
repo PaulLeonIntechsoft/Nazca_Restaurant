@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace Nazca_Restaurant.Controllers
 {
+
     [Authorize]
     public class CajaController : Controller
     {
@@ -37,6 +38,7 @@ namespace Nazca_Restaurant.Controllers
                     if (n == 1)
                     {
                         listaBase = this._databaseManager.sp_listarAperturaCaja().ToList();
+                        ViewBag.Success = "Actualizacion de Apertura realizado exitosamente.";
                         return View(listaBase);
                     }else
                     {
@@ -81,6 +83,7 @@ namespace Nazca_Restaurant.Controllers
                     if (n == 1)
                     {
                         listaBase = this._databaseManager.sp_listarTiposDeCambio().ToList();
+                        ViewBag.Success = "Actualizacion del Tipo de Cambio exitoso.";
                         return View(listaBase);
                     }
                     else

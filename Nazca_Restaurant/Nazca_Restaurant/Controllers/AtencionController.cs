@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Nazca_Restaurant.Models;
 using Nazca_Restaurant.Models.Internal.Entidades;
 using Nazca_Restaurant.Models.Internal.Modelos;
+using System.Globalization;
 
 namespace Nazca_Restaurant.Controllers
 {
+
     [Authorize]
     public class AtencionController : Controller
     {
@@ -352,6 +354,27 @@ namespace Nazca_Restaurant.Controllers
                 int numVenta = ventasModel.Get_NumeroVenta(codMesa);
                 int n = databaseManager.sp_finalizarVenta(numVenta);
                 return Json(new { success = true, responseText = "Your message successfuly sent!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(null, JsonRequestBehavior.AllowGet);
+                throw ex;
+            }
+        }
+
+        public JsonResult CargarDolares()
+        {
+            try
+            {
+                string fecha = DateTime.Now.ToString("yyyy-MM-dd");
+
+                sp_tipoCambioDia_Result tipoHoy = new sp_tipoCambioDia_Result();
+                tipoHoy = databaseManager.sp_tipoCambioDia(DateTime.Now.ToString("yyyy-MM-dd")).ToList().First();
+
+                var tipoCambio = tipoHoy.numTipCam;
+
+                return Json(tipoCambio, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {

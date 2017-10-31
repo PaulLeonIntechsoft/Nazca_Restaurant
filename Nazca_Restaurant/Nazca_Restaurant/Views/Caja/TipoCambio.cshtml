@@ -48,6 +48,11 @@
                 <div class="form-group">
                     <label>Tipo de Cambio :</label>
                     <input id="numTipCam" name="numTipCam" class="form-control" type="text"/>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @if (ViewBag.Success != null)
+                    {
+                    <span class="text-success">@ViewBag.Success</span><br />
+                    }
                 </div>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -57,7 +62,7 @@
                                 <input id="btnGrabar" type="submit" class="btn btn-outline-warning btn-block" value="Grabar" />
                             </div>
                             <div class="col-12 col-md-6">
-                                <a href="@Url.Action("Index","Home")" class="btn btn-outline-warning btn-block">Cancelar</a>
+                                <a href="@Url.Action("Index","Home")" class="btn btn-danger btn-block">Cancelar</a>
                             </div>
                         </div>
                     </div>

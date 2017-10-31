@@ -111,6 +111,9 @@
     <Parameter Name="owner_id" Type="int" Mode="In" />
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="sp_tipoCambioDia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fecha" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="sp_ultimoIndice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="numeroVenta" Type="int" Mode="In" />
   </Function>

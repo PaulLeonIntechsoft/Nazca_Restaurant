@@ -116,6 +116,9 @@
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_tipoCambioDia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_ultimoIndice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="numeroVenta" Type="int" Mode="In" />
         </Function>
@@ -233,6 +236,9 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_tipoCambioDia" ReturnType="Collection(NazResModel.sp_tipoCambioDia_Result)">
+            <Parameter Name="fecha" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_ultimoIndice" ReturnType="Collection(NazResModel.sp_ultimoIndice_Result)">
             <Parameter Name="numeroVenta" Mode="In" Type="Int32" />
@@ -353,6 +359,10 @@
           <Property Type="Byte" Name="bytHabilitado" Nullable="true" />
           <Property Type="Int32" Name="numStockD" Nullable="true" />
           <Property Type="Binary" Name="imgProducto" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_tipoCambioDia_Result">
+          <Property Type="DateTime" Name="dtmTipCam" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="numTipCam" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="sp_ultimoIndice_Result">
           <Property Type="Int32" Name="intNroVen" Nullable="false" />
@@ -561,6 +571,14 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NazResModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_tipoCambioDia" FunctionName="NazResModel.Store.sp_tipoCambioDia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NazResModel.sp_tipoCambioDia_Result">
+                <ScalarProperty Name="dtmTipCam" ColumnName="dtmTipCam" />
+                <ScalarProperty Name="numTipCam" ColumnName="numTipCam" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_ultimoIndice" FunctionName="NazResModel.Store.sp_ultimoIndice">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NazResModel.sp_ultimoIndice_Result">

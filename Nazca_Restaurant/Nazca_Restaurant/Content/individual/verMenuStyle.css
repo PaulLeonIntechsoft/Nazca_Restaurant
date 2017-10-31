@@ -1,3 +1,21 @@
 ﻿#descriptivoPlato ,#nroPlatosVendidos{
     color: white;
 }
+
+.table-container{
+    height: 50vh;
+    max-height: 50vh;
+    overflow-x: auto;
+}
+
+#img-plato-container{
+    height: 35vh;
+}
+
+#img-lcontainer{
+    height: 85%;
+}
+
+#imagenProducto{
+    height: 100%;
+}

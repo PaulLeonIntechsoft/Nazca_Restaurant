@@ -38,7 +38,7 @@ function ajaxListadoMesas() {
                 } else if (v1.chrCodEstado == "C") {
                     $("#" + v1.chrCodMesa).attr('estMesa', 'C');
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
-                    $("#" + v1.chrCodMesa).addClass("bg-primary");
+                    $("#" + v1.chrCodMesa).addClass("bg-secondary");
                 } else {
                     $("#" + v1.chrCodMesa).removeClass("bg-info");
                     $("#" + v1.chrCodMesa).addClass("bg-secondary");

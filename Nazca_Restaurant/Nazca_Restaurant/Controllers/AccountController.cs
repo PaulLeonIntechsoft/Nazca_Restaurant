@@ -14,6 +14,7 @@ using System.Collections.Generic;
 namespace Nazca_Restaurant.Controllers
 {
 
+    [Authorize]
     public class AccountController : Controller
     {
 

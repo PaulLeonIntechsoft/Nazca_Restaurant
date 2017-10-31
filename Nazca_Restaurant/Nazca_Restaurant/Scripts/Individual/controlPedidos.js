@@ -28,7 +28,13 @@
     });
 
     $("#finalizarVenta").click(function () {
-        finalizarPedido();
+        var check = $('input[name=chkPedidos]:checked').length;
+        var rowCount = $('#tbody-menu tr').length;
+        if (check == rowCount) {
+            finalizarPedido();
+        } else {
+            $("#modalPedidosFaltantes").modal("show");
+        }
     });
 
 });
@@ -104,9 +110,9 @@ function agregarPedido() {
                         v += '<div class="form-check">';
                         v += '<label class="form-check-label">';
                         if (v1.bytAteCoc == '0') {
-                            v += '<input class="form-check-input" type="checkbox" value=""  disabled/>';
+                            v += '<input name="chkPedidos" class="form-check-input" type="checkbox" value=""  disabled/>';
                         } else if (v1.bytAteCoc == '1') {
-                            v += '<input class="form-check-input" type="checkbox" value="" selected="selected" disabled/>';
+                            v += '<input name="chkPedidos" class="form-check-input" type="checkbox" value="" selected="selected" disabled/>';
                         }
                         v += '<label>';
                         v += '</div>';
@@ -168,9 +174,9 @@ function eliminarPedido(boton) {
                         v += '<div class="form-check">';
                         v += '<label class="form-check-label">';
                         if (v1.bytAteCoc == '0') {
-                            v += '<input class="form-check-input" type="checkbox" value=""  disabled/>';
+                            v += '<input name="chkPedidos" class="form-check-input" type="checkbox" value=""  disabled/>';
                         } else if (v1.bytAteCoc == '1') {
-                            v += '<input class="form-check-input" type="checkbox" value="" selected="selected" disabled/>';
+                            v += '<input name="chkPedidos" class="form-check-input" type="checkbox" value="" selected="selected" disabled/>';
                         }
                         v += '<label>';
                         v += '</div>';
@@ -276,8 +282,16 @@ function finalizarPedido() {
         },
         type: 'POST',
         success: function (data) {
+            $("#avisoSeleccioneMesa").css("display", "block");
+            $("#avisoDeVacio").css("display", "none");
+            $("#tablaVenta").css("display", "none");
+            $("#cboMozos").val("");
+            $("#cboTiposDeProducto").val("");
+            $("#cboProductos").val("");
+            $("#cantPedido").val("1");
+            $("#comPedido").val("");
+            $("#modoVentana").val("seleccionarMesa");
             ajaxLimpiarSession();
-            ajaxLlenarTabla(codigoMesa);
         },
         error: function (xhr, statusText, err) {
             alert("error" + xhr.status);

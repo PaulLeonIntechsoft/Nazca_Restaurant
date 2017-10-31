@@ -396,6 +396,15 @@ namespace Nazca_Restaurant.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
         }
     
+        public virtual ObjectResult<sp_tipoCambioDia_Result> sp_tipoCambioDia(string fecha)
+        {
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_tipoCambioDia_Result>("sp_tipoCambioDia", fechaParameter);
+        }
+    
         public virtual ObjectResult<sp_ultimoIndice_Result> sp_ultimoIndice(Nullable<int> numeroVenta)
         {
             var numeroVentaParameter = numeroVenta.HasValue ?
